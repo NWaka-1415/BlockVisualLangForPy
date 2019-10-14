@@ -1,6 +1,6 @@
 import block.Block;
 import block.PrintBlockBlock;
-import block.element.Int;
+import block.element.IntBlock;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -73,6 +73,6 @@ public class Main extends PApplet {
     //キーボードが押されている間呼ばれる関数
     public void keyPressed() {
         if (key == 'p') blocks.add(new PrintBlockBlock(this, mouseX, mouseY));
-        else if (key == 'i') blocks.add(new Int(this, mouseX, mouseY));
+        else if (key == 'i') blocks.add(new IntBlock(this, mouseX, mouseY));
     }
 }

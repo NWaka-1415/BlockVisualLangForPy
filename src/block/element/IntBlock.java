@@ -5,11 +5,11 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 
 
-public class Int extends Block {
+public class IntBlock extends Block {
 
     private String content;
 
-    public Int(PApplet applet, int x, int y) {
+    public IntBlock(PApplet applet, int x, int y) {
         super(applet, "int", x, y, 75);
         content = "0";
     }
