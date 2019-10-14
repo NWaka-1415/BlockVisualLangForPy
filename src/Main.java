@@ -35,12 +35,20 @@ public class Main extends PApplet {
 
     //マウスが押されたときに呼ばれる関数
     public void mousePressed() {
-        //ここで逆順に走査しているのはリストの後ろ側にあるブロックの方が
-        //画面上では手前にあるブロックであるため
         for (int i = blocks.size() - 1; i >= 0; i--) {
             Block block = blocks.get(i);
             if (block.isPressed()) { //マウスがそのブロック内にあれば
                 selectedBlock = block;
+                //IncludeElementを手前にソート
+                //ホントは生成時にすべき
+                ArrayList<Block> tmpCanIncludeBlocks = new ArrayList<>();
+                ArrayList<Block> tmpElemBlocks = new ArrayList<>();
+                for (Block bl : blocks) {
+                    if (bl instanceof CanIncludeElementBlock) tmpCanIncludeBlocks.add(bl);
+                    else tmpElemBlocks.add(bl);
+                }
+                blocks = tmpCanIncludeBlocks;
+                blocks.addAll(tmpElemBlocks);
                 break;
             }
         }
@@ -72,7 +80,7 @@ public class Main extends PApplet {
             }
             //選択しているブロックの親が内包可能ブロックである
             if (selectedBlock.parentBlock instanceof CanIncludeElementBlock) {
-                if(!selectedBlock.parentBlock.canConnectElement(selectedBlock)){
+                if (!selectedBlock.parentBlock.canConnectElement(selectedBlock)) {
                     selectedBlock.parentBlock.outBlock();
                 }
             }
