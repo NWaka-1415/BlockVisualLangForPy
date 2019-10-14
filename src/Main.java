@@ -9,12 +9,14 @@ import java.util.ArrayList;
 public class Main extends PApplet {
     ArrayList<Block> blocks;
     Block selectedBlock;
+    String code;
 
     public static void main(String[] args) {
         PApplet.main(Main.class.getName());
     }
 
     private void initialize() {
+        code = "";
         blocks = new ArrayList<>();
         blocks.add(new PrintBlockBlock(this, 500, 250));
     }
@@ -97,16 +99,17 @@ public class Main extends PApplet {
         else if (key == 'i') blocks.add(new IntBlock(this, mouseX, mouseY));
     }
 
-    void changeCode() {
+    private void changeCode() {
         ArrayList<Block> topBlocks = new ArrayList<>();//一応複数想定
         for (Block block : blocks) {
             if (block.prevBlock == null && block.parentBlock == null) {
                 topBlocks.add(block);
             }
         }
+        code = "#code-----------------\n";
         for (Block topBlock : topBlocks) {
-            System.out.println("----------------");
-            System.out.println(topBlock.code());
+            code += topBlock.code();
         }
+        System.out.println(code);
     }
 }
