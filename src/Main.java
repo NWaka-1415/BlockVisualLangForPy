@@ -60,7 +60,6 @@ public class Main extends PApplet {
                 if (selectedBlock != block && block.canConnect(selectedBlock)) {
                     block.connectPostBlock(selectedBlock);  //ブロックの接続
                 }
-                System.out.println(block.canConnectElement(selectedBlock));
                 if (selectedBlock != block && block.canConnectElement(selectedBlock)) {
                     block.enterBlock(selectedBlock);
                 }
@@ -71,11 +70,10 @@ public class Main extends PApplet {
                     selectedBlock.disconnectPreBlock(); //ブロックのつながりを解除
                 }
             }
-            if (selectedBlock instanceof CanIncludeElementBlock) {
-                if (((CanIncludeElementBlock) selectedBlock).includeBlock != null) {
-                    if (!((CanIncludeElementBlock) selectedBlock).includeBlock.canConnectElement(selectedBlock)) {
-                        selectedBlock.outBlock();
-                    }
+            //選択しているブロックの親が内包可能ブロックである
+            if (selectedBlock.parentBlock instanceof CanIncludeElementBlock) {
+                if(!selectedBlock.parentBlock.canConnectElement(selectedBlock)){
+                    selectedBlock.parentBlock.outBlock();
                 }
             }
 

@@ -5,7 +5,7 @@ import processing.core.PConstants;
 
 public class PrintBlockBlock extends CanIncludeElementBlock {
     public PrintBlockBlock(PApplet applet, int x, int y) {
-        super(applet, "print", x, y, 250, 60);
+        super(applet, "print", x, y, 150, 50);
     }
 
     @Override

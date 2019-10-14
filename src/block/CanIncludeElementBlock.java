@@ -11,9 +11,14 @@ public abstract class CanIncludeElementBlock extends Block {
     public CanIncludeElementBlock(PApplet applet, String name, int x, int y, int w, int h) {
         super(applet, name, x, y, w, h);
         includeBlock = null;
-        boxX = x + w - 10 - w / 2;
+        boxW = w / 4 - 10;
+        boxH = h - 14;
+        boxX = x + w - 5 - boxW;
         boxY = y + 7;
-        boxW = w / 2 - 10;
+    }
+
+    protected void resetBox() {
+        boxW = w / 4 - 10;
         boxH = h - 14;
     }
 
@@ -32,6 +37,8 @@ public abstract class CanIncludeElementBlock extends Block {
         includeBlock = block;
         block.parentBlock = this;
 
+        this.w += block.w;
+        boxW += block.w;
         int addX = this.boxX - block.x;
         int addY = this.boxY - block.y;
         block.move(addX, addY);
@@ -41,6 +48,9 @@ public abstract class CanIncludeElementBlock extends Block {
     public void outBlock() {
         this.includeBlock.parentBlock = null;
         this.includeBlock = null;
+        this.w = getDw();
+        this.h = getDh();
+        resetBox();
     }
 
     //中にエレメントを入れられるか
@@ -50,6 +60,6 @@ public abstract class CanIncludeElementBlock extends Block {
         int bx = block.x;
         int by = block.y;
         return boxX <= bx && bx <= boxX + boxW
-                && boxY <= by + block.h / 2 && by + block.h <= boxY + boxH;
+                && boxY <= by + block.h / 2 && by + block.h / 2 <= boxY + boxH;
     }
 }

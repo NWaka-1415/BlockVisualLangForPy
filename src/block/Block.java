@@ -6,6 +6,7 @@ public abstract class Block {
     protected PApplet applet;
     protected String name;
     private String code;
+    private int dw, dh;//デフォルトサイズ
     protected int x, y, w, h;
     public Block prevBlock;
     protected Block postBlock;
@@ -18,6 +19,14 @@ public abstract class Block {
         return code;
     }
 
+    public int getDw() {
+        return dw;
+    }
+
+    public int getDh() {
+        return dh;
+    }
+
     public void setCode(String code) {
         this.code = code;
     }
@@ -25,6 +34,8 @@ public abstract class Block {
     public Block(PApplet applet, String name, int x, int y, int w, int h) {
         this.applet = applet;
         this.name = name;
+        this.dw = w;
+        this.dh = h;
         this.x = x;
         this.y = y;
         this.w = w;
@@ -34,6 +45,8 @@ public abstract class Block {
     public Block(PApplet applet, String name, int x, int y, int w) {
         this.applet = applet;
         this.name = name;
+        this.dw = w;
+        this.dh = h;
         this.x = x;
         this.y = y;
         this.w = w;
@@ -43,6 +56,9 @@ public abstract class Block {
     public Block(PApplet applet, String name, int x, int y) {
         this.applet = applet;
         this.name = name;
+
+        this.dw = w;
+        this.dh = h;
         this.x = x;
         this.y = y;
         this.w = 120;
