@@ -8,6 +8,8 @@ public class Block {
     Block prevBlock;
     private Block postBlock;
 
+    private final int MARGIN = 20;    //許容する二つのブロックの距離の差。適宜変更したり、xとy座標でそれぞれ分けるのもありです
+
     public int X() {
         return x;
     }
@@ -46,14 +48,15 @@ public class Block {
         applet.text(name, x + w / 2, y + h / 3);
     }
 
-    void move(int addX, int addY){
+    void move(int addX, int addY) {
         x += addX;
         y += addY;
         //次のブロックが存在していればそれも合わせて移動させる
-        if(postBlock != null) postBlock.move(addX, addY);
+        if (postBlock != null) postBlock.move(addX, addY);
     }
+
     //上のブロックに対して、引数に渡されたブロックを「下」に接続します
-    void connectPostBlock(Block block){
+    void connectPostBlock(Block block) {
         //接続関係を設定
         this.postBlock = block;
         block.prevBlock = this;
@@ -66,23 +69,22 @@ public class Block {
     }
 
     //上にあるブロックと自分のブロックのつながりを解除
-    void disconnectPreBlock(){
+    void disconnectPreBlock() {
         this.prevBlock.postBlock = null;
         this.prevBlock = null;
     }
+
     //マウスがブロック内にあるかどうか
     boolean isPressed() {
         return x <= applet.mouseX && applet.mouseX <= x + w &&
                 y <= applet.mouseY && applet.mouseY <= y + h;
     }
 
-    int margin = 20;    //許容する二つのブロックの距離の差。適宜変更したり、xとy座標でそれぞれ分けるのもありです
-
     boolean canConnect(Block block) {
         int bx = block.x;
         int by = block.y;
         //abs()は引数の絶対値を返す関数
         //yに関しては相手のブロックの「底」と比較するためにhを足すのを忘れないように
-        return PApplet.abs(x - bx) <= margin && PApplet.abs(y + h - by) <= margin;
+        return PApplet.abs(x - bx) <= MARGIN && PApplet.abs(y + h - by) <= MARGIN;
     }
 }

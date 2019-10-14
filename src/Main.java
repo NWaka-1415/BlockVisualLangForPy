@@ -1,5 +1,4 @@
 import processing.core.PApplet;
-
 import java.util.ArrayList;
 
 public class Main extends PApplet {
@@ -17,7 +16,7 @@ public class Main extends PApplet {
 
     @Override
     public void setup() {
-        size(800, 450);
+        size(1000, 500);
         initialize();
     }
 
