@@ -9,6 +9,7 @@ public abstract class Block {
     protected int x, y, w, h;
     public Block prevBlock;
     protected Block postBlock;
+    public Block parentBlock;
 
     protected final int MARGIN = 20;    //許容する二つのブロックの距離の差。適宜変更したり、xとy座標でそれぞれ分けるのもありです
 
@@ -48,15 +49,23 @@ public abstract class Block {
         this.h = 30;
     }
 
-    public static void createBlock(PApplet applet, int x, int y, int w, int h) {
+    public static void createConnectBlock(PApplet applet, int x, int y, int w, int h) {
         int mainCurve = 6;
+        int connectWidth = 25;
+        int connectHeight = 15;
         applet.beginShape();
         {
             applet.vertex(x + mainCurve, y);
+            applet.vertex(x + mainCurve + 10, y);
+            applet.vertex(x + mainCurve + 10 + connectWidth / 2, y + connectHeight);
+            applet.vertex(x + mainCurve + 10 + connectWidth, y);
             applet.vertex(x + w - 1, y);
             applet.vertex(x + w, y + 1);
             applet.vertex(x + w, y + h - 1);
             applet.vertex(x + w - 1, y + h);
+            applet.vertex(x + mainCurve + 10 + connectWidth, y + h);
+            applet.vertex(x + mainCurve + 10 + connectWidth / 2, y + h + connectHeight);
+            applet.vertex(x + mainCurve + 10, y + h);
             applet.vertex(x + mainCurve, y + h);
             applet.vertex(x, y + h - mainCurve);
             applet.vertex(x, y + mainCurve);
@@ -77,6 +86,12 @@ public abstract class Block {
     //自分がつながるブロックか
     public abstract boolean connectable();
 
+    //ブロックを内包
+    public abstract void enterBlock(Block block);
+
+    //内包ブロックを吐き出す
+    public abstract void outBlock();
+
     //相手のブロックを中に入れられるか
     public abstract boolean canConnectElement(Block block);
 
@@ -92,6 +107,8 @@ public abstract class Block {
 
     //上のブロックに対して、引数に渡されたブロックを「下」に接続します
     public void connectPostBlock(Block block) {
+        if (!block.connectable()) return;
+        if (this.postBlock != null) return;
         //接続関係を設定
         this.postBlock = block;
         block.prevBlock = this;

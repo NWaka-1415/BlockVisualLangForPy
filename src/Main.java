@@ -59,6 +59,10 @@ public class Main extends PApplet {
                 if (selectedBlock != block && block.canConnect(selectedBlock)) {
                     block.connectPostBlock(selectedBlock);  //ブロックの接続
                 }
+                System.out.println(block.canConnectElement(selectedBlock));
+                if (selectedBlock != block && block.canConnectElement(selectedBlock)) {
+                    block.enterBlock(selectedBlock);
+                }
             }
 
             if (selectedBlock.prevBlock != null) { //選択しているブロックの上でほかのぶとっくとつながっていて

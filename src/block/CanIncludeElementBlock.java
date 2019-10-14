@@ -11,16 +11,40 @@ public abstract class CanIncludeElementBlock extends Block {
     public CanIncludeElementBlock(PApplet applet, String name, int x, int y, int w, int h) {
         super(applet, name, x, y, w, h);
         includeBlock = null;
+        boxX = x + w - 10 - w / 2;
+        boxY = y + 7;
+        boxW = w / 2 - 10;
+        boxH = h - 14;
     }
 
-    public void EnterBlock(Block block) {
-        if (includeBlock != null) includeBlock = block;
+    @Override
+    public void move(int addX, int addY) {
+        super.move(addX, addY);
+        //内包ブロックも動かす
+        boxX += addX;
+        boxY += addY;
+        if (includeBlock != null) includeBlock.move(addX, addY);
+    }
+
+    @Override
+    public void enterBlock(Block block) {
+        if (includeBlock != null) return;
+        includeBlock = block;
+        block.parentBlock = this;
+    }
+
+    @Override
+    public void outBlock() {
+
     }
 
     //中にエレメントを入れられるか
+    @Override
     public boolean canConnectElement(Block block) {
+        if (!block.connectableElement()) return false;
         int bx = block.x;
         int by = block.y;
-        return PApplet.abs(boxX - bx) <= MARGIN && PApplet.abs(boxY - by) <= MARGIN;
+        return boxX <= bx && bx <= boxX + boxW
+                && boxY <= by + block.h / 2 && by + block.h <= boxY + boxH;
     }
 }

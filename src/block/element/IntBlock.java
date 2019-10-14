@@ -49,6 +49,14 @@ public class IntBlock extends Block {
     }
 
     @Override
+    public void enterBlock(Block block) {
+    }
+
+    @Override
+    public void outBlock() {
+    }
+
+    @Override
     public boolean canConnectElement(Block block) {
         return false;
     }
