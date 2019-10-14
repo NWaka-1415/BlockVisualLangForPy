@@ -1,4 +1,5 @@
 import block.Block;
+import block.CanIncludeElementBlock;
 import block.PrintBlockBlock;
 import block.element.IntBlock;
 import processing.core.PApplet;
@@ -70,6 +71,14 @@ public class Main extends PApplet {
                     selectedBlock.disconnectPreBlock(); //ブロックのつながりを解除
                 }
             }
+            if (selectedBlock instanceof CanIncludeElementBlock) {
+                if (((CanIncludeElementBlock) selectedBlock).includeBlock != null) {
+                    if (!((CanIncludeElementBlock) selectedBlock).includeBlock.canConnectElement(selectedBlock)) {
+                        selectedBlock.outBlock();
+                    }
+                }
+            }
+
             selectedBlock = null;   //ドラッグ終了のため選択されたブロックは必ずnullに
         }
     }

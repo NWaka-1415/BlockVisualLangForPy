@@ -6,7 +6,7 @@ public abstract class CanIncludeElementBlock extends Block {
 
     protected int boxX, boxY, boxW, boxH;
 
-    Block includeBlock;
+    public Block includeBlock;
 
     public CanIncludeElementBlock(PApplet applet, String name, int x, int y, int w, int h) {
         super(applet, name, x, y, w, h);
@@ -31,11 +31,16 @@ public abstract class CanIncludeElementBlock extends Block {
         if (includeBlock != null) return;
         includeBlock = block;
         block.parentBlock = this;
+
+        int addX = this.boxX - block.x;
+        int addY = this.boxY - block.y;
+        block.move(addX, addY);
     }
 
     @Override
     public void outBlock() {
-
+        this.includeBlock.parentBlock = null;
+        this.includeBlock = null;
     }
 
     //中にエレメントを入れられるか
