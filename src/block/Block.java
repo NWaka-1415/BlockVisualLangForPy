@@ -5,32 +5,20 @@ import processing.core.PApplet;
 public abstract class Block {
     protected PApplet applet;
     protected String name;
-    protected String code;
+    private String code;
     protected int x, y, w, h;
     public Block prevBlock;
     protected Block postBlock;
 
     protected final int MARGIN = 20;    //許容する二つのブロックの距離の差。適宜変更したり、xとy座標でそれぞれ分けるのもありです
 
-    public int X() {
-        return x;
-    }
-
-    public int Y() {
-        return y;
-    }
-
-    public int W() {
-        return w;
-    }
-
-    public int H() {
-        return h;
-    }
-
-    public String Code() {
+    public String code() {
         exchangeCode();
         return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Block(PApplet applet, String name, int x, int y, int w, int h) {
@@ -66,6 +54,12 @@ public abstract class Block {
     //コードに変換
     abstract public void exchangeCode();
 
+    //相手のブロックとつながれるか
+    public abstract boolean canConnect(Block block);
+
+    //自分がつながるブロックか
+    public abstract boolean connectable();
+
     public void move(int addX, int addY) {
         x += addX;
         y += addY;
@@ -97,8 +91,4 @@ public abstract class Block {
         return x <= applet.mouseX && applet.mouseX <= x + w &&
                 y <= applet.mouseY && applet.mouseY <= y + h;
     }
-
-    public abstract boolean canConnect(Block block);
-
-    public abstract boolean connectable();
 }

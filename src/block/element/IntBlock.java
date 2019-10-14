@@ -35,7 +35,7 @@ public class IntBlock extends Block {
 
     @Override
     public void exchangeCode() {
-        code = content;
+        setCode(content);
     }
 
     @Override
