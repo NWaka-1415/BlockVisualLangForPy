@@ -5,7 +5,8 @@ public class Block {
     private PApplet applet;
     private String name;
     private int x, y, w, h;
-    Block prevBlock, postBlock;
+    Block prevBlock;
+    private Block postBlock;
 
     public int X() {
         return x;
