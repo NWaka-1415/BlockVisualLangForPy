@@ -48,6 +48,23 @@ public abstract class Block {
         this.h = 30;
     }
 
+    public static void createBlock(PApplet applet, int x, int y, int w, int h) {
+        int mainCurve = 6;
+        applet.beginShape();
+        {
+            applet.vertex(x + mainCurve, y);
+            applet.vertex(x + w - 1, y);
+            applet.vertex(x + w, y + 1);
+            applet.vertex(x + w, y + h - 1);
+            applet.vertex(x + w - 1, y + h);
+            applet.vertex(x + mainCurve, y + h);
+            applet.vertex(x, y + h - mainCurve);
+            applet.vertex(x, y + mainCurve);
+            applet.vertex(x + mainCurve, y);
+        }
+        applet.endShape();
+    }
+
     //描画部をここに記述
     abstract public void display();
 

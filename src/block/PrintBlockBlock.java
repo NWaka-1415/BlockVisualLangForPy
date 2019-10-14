@@ -13,7 +13,8 @@ public class PrintBlockBlock extends CanIncludeElementBlock {
         applet.strokeWeight(3);
         applet.stroke(241, 196, 15);
         applet.fill(243, 156, 18);   //塗りつぶしの色を黄色に
-        applet.rect(x, y, w, h, 15);    //最後の引数は矩形の角の曲がり具合
+        Block.createBlock(applet, x, y, w, h);
+        //applet.rect(x, y, w, h, 15);    //最後の引数は矩形の角の曲がり具合
         //Text
         applet.fill(255);    //文字色を黒色に
         applet.textAlign(PConstants.CENTER, PConstants.CENTER);
