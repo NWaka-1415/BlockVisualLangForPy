@@ -9,7 +9,7 @@ public abstract class Block {
     private int dw, dh;//デフォルトサイズ
     protected int x, y, w, h;
     public Block prevBlock;
-    protected Block postBlock;
+    public Block postBlock;
     public Block parentBlock;
 
     protected final int MARGIN = 20;    //許容する二つのブロックの距離の差。適宜変更したり、xとy座標でそれぞれ分けるのもありです
@@ -29,6 +29,10 @@ public abstract class Block {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public void addCode(String code) {
+        this.code += code;
     }
 
     public Block(PApplet applet, String name, int x, int y, int w, int h) {

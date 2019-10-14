@@ -85,6 +85,8 @@ public class Main extends PApplet {
                 }
             }
 
+            changeCode();
+
             selectedBlock = null;   //ドラッグ終了のため選択されたブロックは必ずnullに
         }
     }
@@ -93,5 +95,18 @@ public class Main extends PApplet {
     public void keyPressed() {
         if (key == 'p') blocks.add(new PrintBlockBlock(this, mouseX, mouseY));
         else if (key == 'i') blocks.add(new IntBlock(this, mouseX, mouseY));
+    }
+
+    void changeCode() {
+        ArrayList<Block> topBlocks = new ArrayList<>();//一応複数想定
+        for (Block block : blocks) {
+            if (block.prevBlock == null && block.parentBlock == null) {
+                topBlocks.add(block);
+            }
+        }
+        for (Block topBlock : topBlocks) {
+            System.out.println("----------------");
+            System.out.println(topBlock.code());
+        }
     }
 }
