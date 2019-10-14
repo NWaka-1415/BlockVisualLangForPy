@@ -40,4 +40,9 @@ public class PrintBlockBlock extends CanIncludeElementBlock {
     public boolean connectable() {
         return true;
     }
+
+    @Override
+    public boolean connectableElement() {
+        return false;
+    }
 }

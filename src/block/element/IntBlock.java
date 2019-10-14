@@ -47,4 +47,14 @@ public class IntBlock extends Block {
     public boolean connectable() {
         return false;
     }
+
+    @Override
+    public boolean canConnectElement(Block block) {
+        return false;
+    }
+
+    @Override
+    public boolean connectableElement() {
+        return true;
+    }
 }

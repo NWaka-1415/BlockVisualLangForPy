@@ -60,6 +60,12 @@ public abstract class Block {
     //自分がつながるブロックか
     public abstract boolean connectable();
 
+    //相手のブロックを中に入れられるか
+    public abstract boolean canConnectElement(Block block);
+
+    //自分がブロックに入れるか
+    public abstract boolean connectableElement();
+
     public void move(int addX, int addY) {
         x += addX;
         y += addY;
