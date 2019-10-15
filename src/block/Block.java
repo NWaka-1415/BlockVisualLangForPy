@@ -133,6 +133,16 @@ public abstract class Block {
         this.postBlock = block;
         block.prevBlock = this;
 
+        connectDisplay(block);
+    }
+
+    public void connect() {
+        if (prevBlock == null) return;
+        prevBlock.connectDisplay(this);
+    }
+
+    //つながっているように見せる
+    private void connectDisplay(Block block) {
         //複数ブロックの移動の時のために、指定した座標に移動させるのではなく
         //必ず移動量を指定して移動させるようにする。
         int addX = this.x - block.x;

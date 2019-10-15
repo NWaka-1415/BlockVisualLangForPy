@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 public abstract class CanIncludeElementBlock extends Block {
 
-    protected int boxX, boxY, boxW, boxH;
+    protected int boxX, boxY, boxW, boxH, defaultBoxW, defaultBoxH;
 
     public Block includeBlock;
 
@@ -13,13 +13,15 @@ public abstract class CanIncludeElementBlock extends Block {
         includeBlock = null;
         boxW = w / 4 - 10;
         boxH = h - 14;
+        defaultBoxW = boxW;
+        defaultBoxH = boxH;
         boxX = x + w - 5 - boxW;
         boxY = y + 7;
     }
 
     protected void resetBox() {
-        boxW = w / 4 - 10;
-        boxH = h - 14;
+        boxW = defaultBoxW;
+        boxH = defaultBoxH;
     }
 
     @Override
@@ -59,7 +61,7 @@ public abstract class CanIncludeElementBlock extends Block {
         if (!block.connectableElement()) return false;
         int bx = block.x;
         int by = block.y;
-        return boxX <= bx && bx <= boxX + boxW
-                && boxY <= by + block.h / 2 && by + block.h / 2 <= boxY + boxH;
+        return boxX <= bx && bx <= boxX + defaultBoxW
+                && boxY <= by + block.h / 2 && by + block.h / 2 <= boxY + defaultBoxH;
     }
 }

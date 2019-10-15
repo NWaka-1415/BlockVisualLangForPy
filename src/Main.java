@@ -86,7 +86,7 @@ public class Main extends PApplet {
                     selectedBlock.parentBlock.outBlock();
                 }
             }
-
+            selectedBlock.connect();
             changeCode();
 
             selectedBlock = null;   //ドラッグ終了のため選択されたブロックは必ずnullに
