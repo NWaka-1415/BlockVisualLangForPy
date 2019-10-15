@@ -53,6 +53,14 @@ public class IntBlock extends Block {
     }
 
     @Override
+    public void enter() {
+    }
+
+    @Override
+    protected void enterDisplay(Block block) {
+    }
+
+    @Override
     public void outBlock() {
     }
 

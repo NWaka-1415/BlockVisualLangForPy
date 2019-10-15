@@ -109,6 +109,12 @@ public abstract class Block {
     //ブロックを内包
     public abstract void enterBlock(Block block);
 
+    //ブロック内包表示を強制
+    public abstract void enter();
+
+    //ブロック内包表示
+    protected abstract void enterDisplay(Block block);
+
     //内包ブロックを吐き出す
     public abstract void outBlock();
 

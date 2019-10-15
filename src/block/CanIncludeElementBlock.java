@@ -41,6 +41,18 @@ public abstract class CanIncludeElementBlock extends Block {
 
         this.w += block.w;
         boxW += block.w;
+
+        enterDisplay(block);
+    }
+
+    @Override
+    public void enter() {
+        if (includeBlock == null) return;
+        enterDisplay(includeBlock);
+    }
+
+    @Override
+    protected void enterDisplay(Block block) {
         int addX = this.boxX - block.x;
         int addY = this.boxY - block.y;
         block.move(addX, addY);

@@ -85,6 +85,9 @@ public class Main extends PApplet {
                 if (!selectedBlock.parentBlock.canConnectElement(selectedBlock)) {
                     selectedBlock.parentBlock.outBlock();
                 }
+                else {
+                    selectedBlock.parentBlock.enter();
+                }
             }
             selectedBlock.connect();
             changeCode();
