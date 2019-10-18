@@ -5,15 +5,52 @@ import block.PrintBlockBlock;
 import block.element.IntBlock;
 import processing.core.PApplet;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+
+class Window {
+    Graphics2D g2;
+
+    public static void main(String[] args) {
+        Window window = new Window();
+    }
+
+    Window() {
+        JFrame frame = new JFrame();
+        frame.setSize(400, 400);
+        PApplet second = new Main(frame);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
 
 public class Main extends PApplet {
     ArrayList<Block> blocks;
     Block selectedBlock;
     String code;
 
-    public static void main(String[] args) {
-        PApplet.main(Main.class.getName());
+//    public static void main(String[] args) {
+//        PApplet.main(Main.class.getName());
+//    }
+
+    public Main(JFrame frame) {
+        try {
+            java.lang.reflect.Method handleSettingsMethod =
+                    this.getClass().getSuperclass().getDeclaredMethod("handleSettings", null);
+            handleSettingsMethod.setAccessible(true);
+            handleSettingsMethod.invoke(this, null);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        PSurface surface = super.initSurface();
+        Canvas canvas=(Canvas)surface.getNative();
+        surface.placeWindow(new int[]{0, 0}, new int[]{0, 0});
+        frame.add(canvas);
+        frame.add(new JButton());
+        //this.showSurface();
+        this.startSurface();
     }
 
     private void initialize() {
