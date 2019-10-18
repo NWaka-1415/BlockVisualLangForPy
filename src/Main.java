@@ -1,5 +1,6 @@
 import block.Block;
 import block.CanIncludeElementBlock;
+import block.InputtableBlock;
 import block.PrintBlockBlock;
 import block.element.IntBlock;
 import processing.core.PApplet;
@@ -16,9 +17,10 @@ public class Main extends PApplet {
     }
 
     private void initialize() {
+        Block.initialize(this);
         code = "";
         blocks = new ArrayList<>();
-        blocks.add(new PrintBlockBlock(this, 500, 250));
+        blocks.add(new PrintBlockBlock(500, 250));
     }
 
     @Override
@@ -39,6 +41,11 @@ public class Main extends PApplet {
     public void mousePressed() {
         for (int i = blocks.size() - 1; i >= 0; i--) {
             Block block = blocks.get(i);
+            if (block instanceof InputtableBlock) {
+                if (((InputtableBlock) block).isPressedInputField()) {
+                    ((InputtableBlock) block).inputActivate();
+                }
+            }
             if (block.isPressed()) { //マウスがそのブロック内にあれば
                 selectedBlock = block;
                 //IncludeElementを手前にソート
@@ -84,8 +91,7 @@ public class Main extends PApplet {
             if (selectedBlock.parentBlock instanceof CanIncludeElementBlock) {
                 if (!selectedBlock.parentBlock.canConnectElement(selectedBlock)) {
                     selectedBlock.parentBlock.outBlock();
-                }
-                else {
+                } else {
                     selectedBlock.parentBlock.enter();
                 }
             }
@@ -98,8 +104,8 @@ public class Main extends PApplet {
 
     //キーボードが押されている間呼ばれる関数
     public void keyPressed() {
-        if (key == 'p') blocks.add(new PrintBlockBlock(this, mouseX, mouseY));
-        else if (key == 'i') blocks.add(new IntBlock(this, mouseX, mouseY));
+        if (key == 'p') blocks.add(new PrintBlockBlock(mouseX, mouseY));
+        else if (key == 'i') blocks.add(new IntBlock(mouseX, mouseY));
     }
 
     private void changeCode() {

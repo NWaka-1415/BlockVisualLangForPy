@@ -1,19 +1,15 @@
 package block.element;
 
 import block.Block;
-import processing.core.PApplet;
+import block.InputtableBlock;
 import processing.core.PConstants;
 
 
-public class IntBlock extends Block {
+public class IntBlock extends InputtableBlock {
 
-    private String content;
-
-    public IntBlock(PApplet applet, int x, int y) {
-        super(applet, "int", x, y, 75);
-        content = "0";
+    public IntBlock(int x, int y) {
+        super("int", x, y, 75, "0");
     }
-
 
     @Override
     public void display() {
@@ -22,10 +18,8 @@ public class IntBlock extends Block {
         applet.fill(68, 105, 225);
         applet.rect(x, y, w, h, 5);    //最後の引数は矩形の角の曲がり具合
         //Content
-        applet.strokeWeight(1);
-        applet.stroke(100, 100, 100);
-        applet.fill(255);
-        applet.rect(x + w / 3, y + h / 10, w / 3, 8 * h / 10);
+        calcInputFiled();
+        InputtableBlock.createContentFiled(contentX, contentY, contentW, contentH);
         //Text
         applet.fill(0);
         applet.textAlign(PConstants.CENTER, PConstants.CENTER);  //テキストの描画位置をx,yともに真ん中に

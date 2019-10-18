@@ -8,8 +8,8 @@ public abstract class CanIncludeElementBlock extends Block {
 
     public Block includeBlock;
 
-    public CanIncludeElementBlock(PApplet applet, String name, int x, int y, int w, int h) {
-        super(applet, name, x, y, w, h);
+    public CanIncludeElementBlock(String name, int x, int y, int w, int h) {
+        super(name, x, y, w, h);
         includeBlock = null;
         boxW = w / 4 - 10;
         boxH = h - 14;

@@ -3,7 +3,7 @@ package block;
 import processing.core.PApplet;
 
 public abstract class Block {
-    protected PApplet applet;
+    protected static PApplet applet = null;
     protected String name;
     private String code;
     private int dw, dh;//デフォルトサイズ
@@ -35,8 +35,11 @@ public abstract class Block {
         this.code += code;
     }
 
-    public Block(PApplet applet, String name, int x, int y, int w, int h) {
-        this.applet = applet;
+    public static void initialize(PApplet applet) {
+        Block.applet = applet;
+    }
+
+    public Block(String name, int x, int y, int w, int h) {
         this.name = name;
         this.dw = w;
         this.dh = h;
@@ -46,8 +49,7 @@ public abstract class Block {
         this.h = h;
     }
 
-    public Block(PApplet applet, String name, int x, int y, int w) {
-        this.applet = applet;
+    public Block(String name, int x, int y, int w) {
         this.name = name;
         this.dw = w;
         this.dh = h;
@@ -57,10 +59,8 @@ public abstract class Block {
         this.h = 30;
     }
 
-    public Block(PApplet applet, String name, int x, int y) {
-        this.applet = applet;
+    public Block(String name, int x, int y) {
         this.name = name;
-
         this.dw = w;
         this.dh = h;
         this.x = x;
@@ -69,7 +69,7 @@ public abstract class Block {
         this.h = 30;
     }
 
-    public static void createConnectBlock(PApplet applet, int x, int y, int w, int h) {
+    public static void createConnectBlock(int x, int y, int w, int h) {
         int mainCurve = 6;
         int connectWidth = 25;
         int connectHeight = 15;

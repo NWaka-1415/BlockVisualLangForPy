@@ -4,8 +4,8 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 
 public class PrintBlockBlock extends CanIncludeElementBlock {
-    public PrintBlockBlock(PApplet applet, int x, int y) {
-        super(applet, "print", x, y, 150, 50);
+    public PrintBlockBlock(int x, int y) {
+        super("print", x, y, 150, 50);
     }
 
     @Override
@@ -13,7 +13,7 @@ public class PrintBlockBlock extends CanIncludeElementBlock {
         applet.strokeWeight(3);
         applet.stroke(241, 196, 15);
         applet.fill(243, 156, 18);   //塗りつぶしの色を黄色に
-        Block.createConnectBlock(applet, x, y, w, h);
+        Block.createConnectBlock(x, y, w, h);
         applet.strokeWeight(1);
         applet.stroke(100, 100, 100);
         applet.fill(255);
