@@ -35,7 +35,8 @@ public abstract class CanIncludeElementBlock extends Block {
 
     @Override
     public void enterBlock(Block block) {
-        if (includeBlock != null) return;
+        if (includeBlock != null) return;//既に自分が中にブロックを保持していたら無視
+        if (block.parentBlock != null) return;//既に相手のブロックを保持しているブロックがあれば無視
         includeBlock = block;
         block.parentBlock = this;
 
