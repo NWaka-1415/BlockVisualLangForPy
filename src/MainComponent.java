@@ -6,15 +6,16 @@ import block.element.IntBlock;
 import processing.core.PApplet;
 import processing.core.PSurface;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class MainComponent extends PApplet {
     Canvas canvas;
-    ArrayList<Block> blocks;
-    Block selectedBlock;
-    String code;
-    TextArea codeTextArea;
+    private ArrayList<Block> blocks;
+    private Block selectedBlock;
+    private String code;
+    private JTextArea codeTextArea;
 
 //    public static void main(String[] args) {
 //        PApplet.main(Main.class.getName());
@@ -30,7 +31,7 @@ public class MainComponent extends PApplet {
         this.startSurface();
     }
 
-    public void setCodeTextArea(TextArea codeTextArea) {
+    public void setCodeTextArea(JTextArea codeTextArea) {
         this.codeTextArea = codeTextArea;
     }
 
