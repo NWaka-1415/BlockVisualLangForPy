@@ -36,7 +36,7 @@ public class MainComponent extends PApplet {
     }
 
     private void initialize() {
-        Block.initialize(this);
+        Block.initialize(this, this.surface);
         code = "";
         blocks = new ArrayList<>();
         blocks.add(new PrintBlockBlock(500, 250));
@@ -59,11 +59,11 @@ public class MainComponent extends PApplet {
     public void mousePressed() {
         for (int i = blocks.size() - 1; i >= 0; i--) {
             Block block = blocks.get(i);
-            if (block instanceof InputtableBlock) {
-                if (((InputtableBlock) block).isPressedInputField()) {
-                    ((InputtableBlock) block).inputActivate();
-                }
-            }
+//            if (block instanceof InputtableBlock) {
+//                if (((InputtableBlock) block).isPressedInputField()) {
+//                    ((InputtableBlock) block).inputActivate();
+//                }
+//            }
             if (block.isPressed()) { //マウスがそのブロック内にあれば
                 selectedBlock = block;
                 //IncludeElementを手前にソート
@@ -129,6 +129,7 @@ public class MainComponent extends PApplet {
     private void changeCode() {
         ArrayList<Block> topBlocks = new ArrayList<>();//一応複数想定
         for (Block block : blocks) {
+            if (block instanceof InputtableBlock) ((InputtableBlock) block).setContent();
             if (block.prevBlock == null && block.parentBlock == null) {
                 topBlocks.add(block);
             }

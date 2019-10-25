@@ -1,9 +1,14 @@
 package block;
 
 import processing.core.PApplet;
+import processing.core.PSurface;
+
+import javax.swing.*;
+import java.awt.*;
 
 public abstract class Block {
     protected static PApplet applet = null;
+    protected static PSurface surface = null;
     protected String name;
     private String code;
     private int dw, dh;//デフォルトサイズ
@@ -35,8 +40,11 @@ public abstract class Block {
         this.code += code;
     }
 
-    public static void initialize(PApplet applet) {
+    public static void initialize(PApplet applet, PSurface surface) {
         Block.applet = applet;
+        Block.surface = surface;
+        Canvas canvas = (Canvas) surface.getNative();
+        InputtableBlock.paneSet((JLayeredPane) canvas.getParent().getParent());
     }
 
     public Block(String name, int x, int y, int w, int h) {

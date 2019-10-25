@@ -1,27 +1,46 @@
 package block;
 
+import javax.swing.*;
+
 public abstract class InputtableBlock extends Block {
 
+
+    private static JLayeredPane pane;
     protected String content;
+    private JTextField textField;
     protected boolean inputActiveFlag;
     protected int contentX, contentY, contentW, contentH;
+
+    public static void paneSet(JLayeredPane pane) {
+        InputtableBlock.pane = pane;
+    }
 
     public InputtableBlock(String name, int x, int y, int w, int h, String content) {
         super(name, x, y, w, h);
         this.content = content;
         inputActiveFlag = false;
+        setTextField();
     }
 
     public InputtableBlock(String name, int x, int y, int w, String content) {
         super(name, x, y, w);
         this.content = content;
         inputActiveFlag = false;
+        setTextField();
     }
 
     public InputtableBlock(String name, int x, int y, String content) {
         super(name, x, y);
         this.content = content;
         inputActiveFlag = false;
+        setTextField();
+    }
+
+    private void setTextField() {
+        calcInputFiled();
+        textField = new JTextField(content);
+        textField.setBounds(contentX, contentY, contentW, contentH);
+        pane.add(textField);
     }
 
     protected void calcInputFiled() {
@@ -29,6 +48,13 @@ public abstract class InputtableBlock extends Block {
         contentY = y + h / 10;
         contentW = w / 3;
         contentH = 8 * h / 10;
+    }
+
+    @Override
+    public void move(int addX, int addY) {
+        super.move(addX, addY);
+        calcInputFiled();
+        textField.setLocation(contentX + addX, contentY + addY);
     }
 
     //入力状態に移行
@@ -39,6 +65,10 @@ public abstract class InputtableBlock extends Block {
     //入力状態解除
     public void inputDeactivate() {
         inputActiveFlag = false;
+    }
+
+    public void setContent() {
+        content = textField.getText();
     }
 
     public boolean isPressedInputField() {
