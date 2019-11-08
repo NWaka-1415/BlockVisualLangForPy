@@ -2,12 +2,16 @@ package block;
 
 import javax.swing.*;
 
+import controlP5.*;
+
 public abstract class InputtableBlock extends Block {
 
 
     private static JLayeredPane pane;
     protected String content;
-    private JTextField textField;
+    //    private JTextField textField;
+    private Textfield textfield;
+    private ControlP5 cp5;
     protected boolean inputActiveFlag;
     protected int contentX, contentY, contentW, contentH;
 
@@ -19,6 +23,7 @@ public abstract class InputtableBlock extends Block {
         super(name, x, y, w, h);
         this.content = content;
         inputActiveFlag = false;
+        cp5 = new ControlP5(applet);
         setTextField();
     }
 
@@ -26,6 +31,7 @@ public abstract class InputtableBlock extends Block {
         super(name, x, y, w);
         this.content = content;
         inputActiveFlag = false;
+        cp5 = new ControlP5(applet);
         setTextField();
     }
 
@@ -33,14 +39,18 @@ public abstract class InputtableBlock extends Block {
         super(name, x, y);
         this.content = content;
         inputActiveFlag = false;
+        cp5 = new ControlP5(applet);
         setTextField();
     }
 
     private void setTextField() {
         calcInputFiled();
-        textField = new JTextField(content);
-        textField.setBounds(contentX, contentY, contentW, contentH);
-        pane.add(textField);
+        textfield = cp5.addTextfield(content).setAutoClear(false).setFocus(true).setColorBackground(255);
+        textfield.setSize(contentW, contentH);
+        textfield.setPosition(contentX, contentY);
+//        textField = new JTextField(content);
+//        textField.setBounds(contentX, contentY, contentW, contentH);
+//        pane.add(textField);
     }
 
     protected void calcInputFiled() {
@@ -54,7 +64,8 @@ public abstract class InputtableBlock extends Block {
     public void move(int addX, int addY) {
         super.move(addX, addY);
         calcInputFiled();
-        textField.setLocation(contentX + addX, contentY + addY);
+        textfield.setPosition(contentX + addX, contentY + addY);
+//        textField.setLocation(contentX + addX, contentY + addY);
     }
 
     //入力状態に移行
@@ -68,7 +79,8 @@ public abstract class InputtableBlock extends Block {
     }
 
     public void setContent() {
-        content = textField.getText();
+//        content = textField.getText();
+        content = textfield.getText();
     }
 
     public boolean isPressedInputField() {
