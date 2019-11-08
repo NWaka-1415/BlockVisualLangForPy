@@ -3,6 +3,7 @@ import block.CanIncludeElementBlock;
 import block.InputtableBlock;
 import block.PrintBlockBlock;
 import block.element.IntBlock;
+import block.objects.AppletObject;
 import processing.core.PApplet;
 import processing.core.PSurface;
 
@@ -36,7 +37,8 @@ public class MainComponent extends PApplet {
     }
 
     private void initialize() {
-        Block.initialize(this, this.surface);
+        AppletObject.setApplet(this);
+        Block.initialize(this.surface);
         code = "";
         blocks = new ArrayList<>();
         blocks.add(new PrintBlockBlock(500, 250));

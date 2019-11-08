@@ -16,6 +16,7 @@ public class IntBlock extends InputtableBlock {
         applet.stroke(40, 90, 225);
         applet.fill(68, 105, 225);
         applet.rect(x, y, w, h, 5);    //最後の引数は矩形の角の曲がり具合
+        super.display();
         //Content
         //calcInputFiled();
         //InputtableBlock.createContentFiled(contentX, contentY, contentW, contentH);

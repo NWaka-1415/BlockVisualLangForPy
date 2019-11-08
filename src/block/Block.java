@@ -1,13 +1,14 @@
 package block;
 
+import block.objects.AppletObject;
 import processing.core.PApplet;
 import processing.core.PSurface;
 
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class Block {
-    protected static PApplet applet = null;
+public abstract class Block extends AppletObject {
+    //    protected static PApplet applet = null;
     protected static PSurface surface = null;
     protected String name;
     private String code;
@@ -40,8 +41,7 @@ public abstract class Block {
         this.code += code;
     }
 
-    public static void initialize(PApplet applet, PSurface surface) {
-        Block.applet = applet;
+    public static void initialize(PSurface surface) {
         Block.surface = surface;
         Canvas canvas = (Canvas) surface.getNative();
         InputtableBlock.paneSet((JLayeredPane) canvas.getParent().getParent());

@@ -1,5 +1,7 @@
 package block;
 
+import block.objects.TextField;
+
 import javax.swing.*;
 
 public abstract class InputtableBlock extends Block {
@@ -7,7 +9,8 @@ public abstract class InputtableBlock extends Block {
 
     private static JLayeredPane pane;
     protected String content;
-    private JTextField textField;
+    //    private JTextField textField;
+    private TextField textField;
     protected boolean inputActiveFlag;
     protected int contentX, contentY, contentW, contentH;
 
@@ -38,9 +41,10 @@ public abstract class InputtableBlock extends Block {
 
     private void setTextField() {
         calcInputFiled();
-        textField = new JTextField(content);
-        textField.setBounds(contentX, contentY, contentW, contentH);
-        pane.add(textField);
+        textField = new TextField(content, contentX, contentY, contentW, contentH);
+//        textField = new JTextField(content);
+//        textField.setBounds(contentX, contentY, contentW, contentH);
+//        pane.add(textField);
     }
 
     protected void calcInputFiled() {
@@ -51,10 +55,16 @@ public abstract class InputtableBlock extends Block {
     }
 
     @Override
+    public void display() {
+        textField.display();
+    }
+
+    @Override
     public void move(int addX, int addY) {
         super.move(addX, addY);
         calcInputFiled();
-        textField.setLocation(contentX + addX, contentY + addY);
+        textField.move(addX, addY);
+//        textField.setLocation(contentX + addX, contentY + addY);
     }
 
     //入力状態に移行
