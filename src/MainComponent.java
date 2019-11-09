@@ -4,6 +4,7 @@ import block.InputtableBlock;
 import block.PrintBlockBlock;
 import block.element.IntBlock;
 import block.objects.AppletObject;
+import block.objects.TextField;
 import processing.core.PApplet;
 import processing.core.PSurface;
 
@@ -39,6 +40,7 @@ public class MainComponent extends PApplet {
     private void initialize() {
         AppletObject.setApplet(this);
         Block.initialize(this.surface);
+        TextField.initialize();
         code = "";
         blocks = new ArrayList<>();
         blocks.add(new PrintBlockBlock(500, 250));
@@ -124,6 +126,8 @@ public class MainComponent extends PApplet {
 
     //キーボードが押されている間呼ばれる関数
     public void keyPressed() {
+        System.out.println(key);
+        TextField.set(key);
         if (key == 'p') blocks.add(new PrintBlockBlock(mouseX, mouseY));
         else if (key == 'i') blocks.add(new IntBlock(mouseX, mouseY));
     }

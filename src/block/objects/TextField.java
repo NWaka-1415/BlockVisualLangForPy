@@ -1,14 +1,29 @@
 package block.objects;
 
+import block.enums.TextType;
 import processing.core.PConstants;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
-public class TextField extends AppletObject implements KeyListener {
+public class TextField extends AppletObject {
+    private static TextField selectTextField = null;
+    private static ArrayList<TextField> textFields;
+
     private String text;
+    private TextType textType;
+    boolean isFocus;
     int x, y, w, h;
     int dW, dH;
+
+    public static ArrayList<TextField> getTextFields() {
+        return textFields;
+    }
+
+    public static void initialize() {
+        textFields = new ArrayList<>();
+    }
 
     public String getText() {
         return text;
@@ -38,6 +53,9 @@ public class TextField extends AppletObject implements KeyListener {
         this.w = 10;
         this.dW = w;
         this.h = 10;
+        isFocus = true;
+        textFields.add(this);
+        focus();
     }
 
     public TextField(String text, int x, int y, int w, int h) {
@@ -47,6 +65,9 @@ public class TextField extends AppletObject implements KeyListener {
         this.w = w;
         dW = w;
         this.h = h;
+        isFocus = true;
+        textFields.add(this);
+        focus();
     }
 
     public void setSize(int w, int h) {
@@ -59,19 +80,14 @@ public class TextField extends AppletObject implements KeyListener {
         this.y += addY;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
+    public void focus() {
+        if (selectTextField != null) selectTextField.isFocus = false;
+        isFocus = true;
+        selectTextField = this;
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        char key = e.getKeyChar();
-        System.out.println(key);
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
+    public static void set(char key) {
+        if (selectTextField == null) return;
+        selectTextField.text += key;
     }
 }

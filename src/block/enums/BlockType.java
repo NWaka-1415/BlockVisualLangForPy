@@ -1,4 +1,4 @@
-package block;
+package block.enums;
 
 public enum BlockType {
     Connectable,
