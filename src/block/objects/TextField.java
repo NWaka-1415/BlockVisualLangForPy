@@ -13,9 +13,18 @@ public class TextField extends AppletObject {
 
     private String text;
     private TextType textType;
-    boolean isFocus;
-    int x, y, w, h;
-    int dW, dH;
+    private boolean isFocus;
+    private int x, y, w, h;
+    private int dW, dH;
+
+    public static boolean isNumeric(String str) {
+        try {
+            int textInt = Integer.parseInt(str);
+        } catch (NumberFormatException | NullPointerException e) {
+            return false;
+        }
+        return true;
+    }
 
     public static ArrayList<TextField> getTextFields() {
         return textFields;
@@ -29,6 +38,30 @@ public class TextField extends AppletObject {
         return text;
     }
 
+    public int getDW() {
+        return dW;
+    }
+
+    public int getDH() {
+        return dH;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getW() {
+        return w;
+    }
+
+    public int getH() {
+        return h;
+    }
+
     public void display() {
         applet.strokeWeight(1);
         applet.stroke(100, 100, 100);
@@ -40,10 +73,23 @@ public class TextField extends AppletObject {
         applet.text(text, x + w / 2, y + h / 2);
     }
 
+    public void setTextType(TextType textType) {
+        this.textType = textType;
+    }
+
     public void setText(String text) {
+        if (textType == TextType.Integer && !isNumeric(text)) return;
         this.text = text;
-        if (text.length() > 3) w += (text.length() - 3) * 5;
+        if (text.length() > 1) w = dW + (text.length() - 1) * 13;
         else w = dW;
+    }
+
+    public void addText(String text) {
+        setText(this.text + text);
+    }
+
+    public void addText(char text) {
+        setText(this.text + text);
     }
 
     public TextField(String text) {
@@ -86,8 +132,13 @@ public class TextField extends AppletObject {
         selectTextField = this;
     }
 
+    public boolean isPressed() {
+        return x <= applet.mouseX && applet.mouseX <= x + w &&
+                y <= applet.mouseY && applet.mouseY <= y + h;
+    }
+
     public static void set(char key) {
         if (selectTextField == null) return;
-        selectTextField.text += key;
+        selectTextField.addText(key);
     }
 }

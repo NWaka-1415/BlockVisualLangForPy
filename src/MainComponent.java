@@ -70,16 +70,24 @@ public class MainComponent extends PApplet {
 //            }
             if (block.isPressed()) { //マウスがそのブロック内にあれば
                 selectedBlock = block;
-                //IncludeElementを手前にソート
-                //ホントは生成時にすべき
-                ArrayList<Block> tmpCanIncludeBlocks = new ArrayList<>();
-                ArrayList<Block> tmpElemBlocks = new ArrayList<>();
-                for (Block bl : blocks) {
-                    if (bl instanceof CanIncludeElementBlock) tmpCanIncludeBlocks.add(bl);
-                    else tmpElemBlocks.add(bl);
+                if (block instanceof InputtableBlock && ((InputtableBlock) block).isPressedInputField()) {
+                    ((InputtableBlock) block).setFocusToContent();
+                    selectedBlock = null;
                 }
-                blocks = tmpCanIncludeBlocks;
-                blocks.addAll(tmpElemBlocks);
+
+                {
+                    //IncludeElementを手前にソート
+                    //ホントは生成時にすべき
+                    ArrayList<Block> tmpCanIncludeBlocks = new ArrayList<>();
+                    ArrayList<Block> tmpElemBlocks = new ArrayList<>();
+                    for (Block bl : blocks) {
+                        if (bl instanceof CanIncludeElementBlock) tmpCanIncludeBlocks.add(bl);
+                        else tmpElemBlocks.add(bl);
+                    }
+                    blocks = tmpCanIncludeBlocks;
+                    blocks.addAll(tmpElemBlocks);
+                }
+
                 break;
             }
         }

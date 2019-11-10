@@ -10,7 +10,7 @@ public abstract class InputtableBlock extends Block {
     private static JLayeredPane pane;
     protected String content;
     //    private JTextField textField;
-    private TextField textField;
+    protected TextField textField;
     protected boolean inputActiveFlag;
     protected int contentX, contentY, contentW, contentH;
 
@@ -82,8 +82,11 @@ public abstract class InputtableBlock extends Block {
     }
 
     public boolean isPressedInputField() {
-        return contentX <= applet.mouseX && applet.mouseX <= contentX + contentW &&
-                contentY <= applet.mouseY && applet.mouseY <= contentY + contentH;
+        return textField.isPressed();
+    }
+
+    public void setFocusToContent(){
+        textField.focus();
     }
 
     public static void createContentFiled(int x, int y, int w, int h) {

@@ -2,12 +2,14 @@ package block.element;
 
 import block.Block;
 import block.InputtableBlock;
+import block.enums.TextType;
 
 
 public class IntBlock extends InputtableBlock {
 
     public IntBlock(int x, int y) {
         super("int", x, y, 75, "0");
+        textField.setTextType(TextType.Integer);
     }
 
     @Override
