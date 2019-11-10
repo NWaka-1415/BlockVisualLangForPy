@@ -26,6 +26,16 @@ public class TextField extends AppletObject {
         return true;
     }
 
+    public static String parseIntToString(String str) {
+        String text = "";
+        try {
+            int textInt = Integer.parseInt(str);
+            text = String.format("%d", textInt);
+        } catch (NumberFormatException | NullPointerException ignored) {
+        }
+        return text;
+    }
+
     public static ArrayList<TextField> getTextFields() {
         return textFields;
     }
@@ -78,7 +88,10 @@ public class TextField extends AppletObject {
     }
 
     public void setText(String text) {
-        if (textType == TextType.Integer && !isNumeric(text)) return;
+        if (textType == TextType.Integer) {
+            if (isNumeric(text)) text = parseIntToString(text);
+            else return;
+        }
         this.text = text;
         if (text.length() > 1) w = dW + (text.length() - 1) * 13;
         else w = dW;
