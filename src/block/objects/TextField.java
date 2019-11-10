@@ -1,5 +1,6 @@
 package block.objects;
 
+import block.InputtableBlock;
 import block.enums.TextType;
 import processing.core.PConstants;
 
@@ -12,6 +13,7 @@ public class TextField extends AppletObject {
     private static ArrayList<TextField> textFields;
 
     private String text;
+    private InputtableBlock parentBlock;
     private TextType textType;
     private boolean isFocus;
     private int x, y, w, h;
@@ -93,8 +95,13 @@ public class TextField extends AppletObject {
             else return;
         }
         this.text = text;
-        if (text.length() > 1) w = dW + (text.length() - 1) * 13;
-        else w = dW;
+        if (text.length() > 1) {
+            w = dW + (text.length() - 1) * 13;
+            parentBlock.setSize(parentBlock.getDw() + (text.length() - 1) * 13, parentBlock.getDh());
+        } else {
+            w = dW;
+            parentBlock.resetSize();
+        }
     }
 
     public void addText(String text) {
@@ -105,7 +112,8 @@ public class TextField extends AppletObject {
         setText(this.text + text);
     }
 
-    public TextField(String text) {
+    public TextField(String text, InputtableBlock inputtableBlock) {
+        this.parentBlock = inputtableBlock;
         this.text = text;
         this.x = 0;
         this.y = 0;
@@ -117,7 +125,8 @@ public class TextField extends AppletObject {
         focus();
     }
 
-    public TextField(String text, int x, int y, int w, int h) {
+    public TextField(String text, int x, int y, int w, int h, InputtableBlock inputtableBlock) {
+        this.parentBlock = inputtableBlock;
         this.text = text;
         this.x = x;
         this.y = y;

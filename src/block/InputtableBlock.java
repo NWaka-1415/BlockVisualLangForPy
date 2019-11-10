@@ -11,7 +11,6 @@ public abstract class InputtableBlock extends Block {
     protected String content;
     //    private JTextField textField;
     protected TextField textField;
-    protected boolean inputActiveFlag;
     protected int contentX, contentY, contentW, contentH;
 
     public static void paneSet(JLayeredPane pane) {
@@ -21,30 +20,24 @@ public abstract class InputtableBlock extends Block {
     public InputtableBlock(String name, int x, int y, int w, int h, String content) {
         super(name, x, y, w, h);
         this.content = content;
-        inputActiveFlag = false;
         setTextField();
     }
 
     public InputtableBlock(String name, int x, int y, int w, String content) {
         super(name, x, y, w);
         this.content = content;
-        inputActiveFlag = false;
         setTextField();
     }
 
     public InputtableBlock(String name, int x, int y, String content) {
         super(name, x, y);
         this.content = content;
-        inputActiveFlag = false;
         setTextField();
     }
 
     private void setTextField() {
         calcInputFiled();
-        textField = new TextField(content, contentX, contentY, contentW, contentH);
-//        textField = new JTextField(content);
-//        textField.setBounds(contentX, contentY, contentW, contentH);
-//        pane.add(textField);
+        textField = new TextField(content, contentX, contentY, contentW, contentH, this);
     }
 
     protected void calcInputFiled() {
@@ -67,16 +60,6 @@ public abstract class InputtableBlock extends Block {
 //        textField.setLocation(contentX + addX, contentY + addY);
     }
 
-    //入力状態に移行
-    public void inputActivate() {
-        inputActiveFlag = true;
-    }
-
-    //入力状態解除
-    public void inputDeactivate() {
-        inputActiveFlag = false;
-    }
-
     public void setContent() {
         content = textField.getText();
     }
@@ -85,8 +68,18 @@ public abstract class InputtableBlock extends Block {
         return textField.isPressed();
     }
 
-    public void setFocusToContent(){
+    public void setFocusToContent() {
         textField.focus();
+    }
+
+    public void setSize(int w, int h) {
+        this.w = w;
+        this.h = h;
+    }
+
+    public void resetSize() {
+        w = getDw();
+        h = getDh();
     }
 
     public static void createContentFiled(int x, int y, int w, int h) {

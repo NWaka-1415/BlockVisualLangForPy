@@ -60,21 +60,21 @@ public abstract class Block extends AppletObject {
     public Block(String name, int x, int y, int w) {
         this.name = name;
         this.dw = w;
-        this.dh = h;
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = 30;
+        this.dh = h;
     }
 
     public Block(String name, int x, int y) {
         this.name = name;
-        this.dw = w;
-        this.dh = h;
         this.x = x;
         this.y = y;
         this.w = 120;
         this.h = 30;
+        this.dw = w;
+        this.dh = h;
     }
 
     public static void createConnectBlock(int x, int y, int w, int h) {
