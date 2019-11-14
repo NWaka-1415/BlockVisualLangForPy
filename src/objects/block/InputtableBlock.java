@@ -2,7 +2,6 @@ package objects.block;
 
 import objects.TextField;
 
-import javax.swing.*;
 
 public abstract class InputtableBlock extends Block {
     protected String content;

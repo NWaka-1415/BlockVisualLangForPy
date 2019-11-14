@@ -1,6 +1,5 @@
 package objects;
 
-import objects.block.CanIncludeElementBlock;
 import objects.block.InputtableBlock;
 import objects.block.enums.TextType;
 import processing.core.PConstants;

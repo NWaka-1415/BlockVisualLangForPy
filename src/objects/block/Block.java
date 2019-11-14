@@ -3,9 +3,6 @@ package objects.block;
 import objects.AppletObject;
 import processing.core.PSurface;
 
-import javax.swing.*;
-import java.awt.*;
-
 public abstract class Block extends AppletObject {
     //    protected static PApplet applet = null;
     protected static PSurface surface = null;

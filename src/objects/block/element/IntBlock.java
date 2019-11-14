@@ -1,6 +1,5 @@
 package objects.block.element;
 
-import objects.AppletObject;
 import objects.block.Block;
 import objects.block.InputtableBlock;
 import objects.block.enums.TextType;
