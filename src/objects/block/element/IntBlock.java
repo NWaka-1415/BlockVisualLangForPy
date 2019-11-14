@@ -1,8 +1,9 @@
-package block.element;
+package objects.block.element;
 
-import block.Block;
-import block.InputtableBlock;
-import block.enums.TextType;
+import objects.AppletObject;
+import objects.block.Block;
+import objects.block.InputtableBlock;
+import objects.block.enums.TextType;
 
 
 public class IntBlock extends InputtableBlock {
@@ -19,14 +20,15 @@ public class IntBlock extends InputtableBlock {
         applet.fill(68, 105, 225);
         applet.rect(x, y, w, h, 5);    //最後の引数は矩形の角の曲がり具合
         super.display();
-        //Content
-        //calcInputFiled();
-        //InputtableBlock.createContentFiled(contentX, contentY, contentW, contentH);
-        //Text
-//        applet.fill(0);
-//        applet.textAlign(PConstants.CENTER, PConstants.CENTER);  //テキストの描画位置をx,yともに真ん中に
-//        applet.textSize(20);
-//        applet.text(content, x + w / 2, y + h / 2 - h / 10);
+    }
+
+    @Override
+    public void setContent() {
+        content = textField.getText();
+        if (content == null || content.equals("")) {
+            textField.setText("0");
+            content = "0";
+        }
     }
 
     @Override

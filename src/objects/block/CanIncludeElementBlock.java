@@ -1,6 +1,4 @@
-package block;
-
-import processing.core.PApplet;
+package objects.block;
 
 public abstract class CanIncludeElementBlock extends Block {
 
@@ -40,8 +38,8 @@ public abstract class CanIncludeElementBlock extends Block {
         includeBlock = block;
         block.parentBlock = this;
 
-        this.w += block.w;
-        boxW += block.w;
+        this.w = getDw() + block.w;
+        boxW = defaultBoxW + block.w;
 
         enterDisplay(block);
     }

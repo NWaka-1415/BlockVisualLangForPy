@@ -1,10 +1,10 @@
-import block.Block;
-import block.CanIncludeElementBlock;
-import block.InputtableBlock;
-import block.PrintBlockBlock;
-import block.element.IntBlock;
-import block.objects.AppletObject;
-import block.objects.TextField;
+import objects.block.Block;
+import objects.block.CanIncludeElementBlock;
+import objects.block.InputtableBlock;
+import objects.block.PrintBlockBlock;
+import objects.block.element.IntBlock;
+import objects.AppletObject;
+import objects.TextField;
 import processing.core.PApplet;
 import processing.core.PSurface;
 
@@ -63,9 +63,9 @@ public class MainComponent extends PApplet {
     public void mousePressed() {
         for (int i = blocks.size() - 1; i >= 0; i--) {
             Block block = blocks.get(i);
-//            if (block instanceof InputtableBlock) {
-//                if (((InputtableBlock) block).isPressedInputField()) {
-//                    ((InputtableBlock) block).inputActivate();
+//            if (objects.block instanceof InputtableBlock) {
+//                if (((InputtableBlock) objects.block).isPressedInputField()) {
+//                    ((InputtableBlock) objects.block).inputActivate();
 //                }
 //            }
             if (block.isPressed()) { //マウスがそのブロック内にあれば
@@ -138,6 +138,19 @@ public class MainComponent extends PApplet {
         TextField.set(key);
         if (key == 'p') blocks.add(new PrintBlockBlock(mouseX, mouseY));
         else if (key == 'i') blocks.add(new IntBlock(mouseX, mouseY));
+        switch (keyCode) {
+            case BACKSPACE:
+                TextField.minusSet();
+                break;
+            case RIGHT:
+                TextField.moveTextPosition(true);
+                AppletObject.debugLog("Right");
+                break;
+            case LEFT:
+                TextField.moveTextPosition(false);
+                AppletObject.debugLog("Left");
+                break;
+        }
     }
 
     private void changeCode() {

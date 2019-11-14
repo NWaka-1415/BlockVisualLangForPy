@@ -1,21 +1,14 @@
-package block;
+package objects.block;
 
-import block.objects.TextField;
+import objects.TextField;
 
 import javax.swing.*;
 
 public abstract class InputtableBlock extends Block {
-
-
-    private static JLayeredPane pane;
     protected String content;
     //    private JTextField textField;
     protected TextField textField;
     protected int contentX, contentY, contentW, contentH;
-
-    public static void paneSet(JLayeredPane pane) {
-        InputtableBlock.pane = pane;
-    }
 
     public InputtableBlock(String name, int x, int y, int w, int h, String content) {
         super(name, x, y, w, h);
@@ -70,16 +63,6 @@ public abstract class InputtableBlock extends Block {
 
     public void setFocusToContent() {
         textField.focus();
-    }
-
-    public void setSize(int w, int h) {
-        this.w = w;
-        this.h = h;
-    }
-
-    public void resetSize() {
-        w = getDw();
-        h = getDh();
     }
 
     public static void createContentFiled(int x, int y, int w, int h) {

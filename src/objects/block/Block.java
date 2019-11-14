@@ -1,7 +1,6 @@
-package block;
+package objects.block;
 
-import block.objects.AppletObject;
-import processing.core.PApplet;
+import objects.AppletObject;
 import processing.core.PSurface;
 
 import javax.swing.*;
@@ -43,8 +42,6 @@ public abstract class Block extends AppletObject {
 
     public static void initialize(PSurface surface) {
         Block.surface = surface;
-        Canvas canvas = (Canvas) surface.getNative();
-        InputtableBlock.paneSet((JLayeredPane) canvas.getParent().getParent());
     }
 
     public Block(String name, int x, int y, int w, int h) {
@@ -132,6 +129,18 @@ public abstract class Block extends AppletObject {
     //自分がブロックに入れるか
     public abstract boolean connectableElement();
 
+    //サイズのセット
+    public void setSize(int w, int h) {
+        this.w = w;
+        this.h = h;
+        if (parentBlock != null) parentBlock.setSize(parentBlock.getDw() + w, parentBlock.getDh());
+    }
+
+    public void resetSize() {
+        w = dw;
+        h = dh;
+    }
+
     public void move(int addX, int addY) {
         x += addX;
         y += addY;
@@ -171,6 +180,7 @@ public abstract class Block extends AppletObject {
     }
 
     //マウスがブロック内にあるかどうか
+    @Override
     public boolean isPressed() {
         return x <= applet.mouseX && applet.mouseX <= x + w &&
                 y <= applet.mouseY && applet.mouseY <= y + h;
