@@ -10,6 +10,7 @@ public class PrintBlockBlock extends CanIncludeElementBlock {
 
     @Override
     public void display() {
+        super.display();
         applet.strokeWeight(3);
         applet.stroke(241, 196, 15);
         applet.fill(243, 156, 18);   //塗りつぶしの色を黄色に

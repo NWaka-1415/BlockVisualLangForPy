@@ -23,6 +23,11 @@ public abstract class CanIncludeElementBlock extends Block {
     }
 
     @Override
+    public void display() {
+        if (includeBlock != null) boxW = includeBlock.w + 15;
+    }
+
+    @Override
     public void move(int addX, int addY) {
         super.move(addX, addY);
         //内包ブロックも動かす
