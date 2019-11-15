@@ -117,6 +117,7 @@ public class TextField extends AppletObject {
         this.h = h;
     }
 
+    @Override
     public void move(int addX, int addY) {
         this.x += addX;
         this.y += addY;

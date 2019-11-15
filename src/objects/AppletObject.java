@@ -17,5 +17,9 @@ public abstract class AppletObject {
         System.out.println(message);
     }
 
+    public abstract void display();
+
+    public abstract void move(int addX, int addY);
+
     public abstract boolean isPressed();
 }
