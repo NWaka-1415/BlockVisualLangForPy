@@ -129,6 +129,10 @@ public class TextField extends AppletObject {
         selectTextField = this;
     }
 
+    public static void focusOut() {
+        if (selectTextField != null) selectTextField.isFocus = false;
+    }
+
     @Override
     public boolean isPressed() {
         return x <= applet.mouseX && applet.mouseX <= x + w &&

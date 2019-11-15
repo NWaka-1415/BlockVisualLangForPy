@@ -2,6 +2,7 @@ import objects.block.Block;
 import objects.block.CanIncludeElementBlock;
 import objects.block.InputtableBlock;
 import objects.block.PrintBlockBlock;
+import objects.block.element.BoolBlock;
 import objects.block.element.IntBlock;
 import objects.AppletObject;
 import objects.TextField;
@@ -91,6 +92,7 @@ public class MainComponent extends PApplet {
                 break;
             }
         }
+        TextField.focusOut();
     }
 
     //マウスをドラッグしている間呼ばれる関数
@@ -138,6 +140,7 @@ public class MainComponent extends PApplet {
         TextField.set(key);
         if (key == 'p') blocks.add(new PrintBlockBlock(mouseX, mouseY));
         else if (key == 'i') blocks.add(new IntBlock(mouseX, mouseY));
+        else if (key == 'b') blocks.add(new BoolBlock(mouseX, mouseY));
         switch (keyCode) {
             case BACKSPACE:
                 TextField.minusSet();

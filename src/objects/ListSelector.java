@@ -15,6 +15,27 @@ public class ListSelector extends AppletObject {
     private int x, y, w, h;
     private int dW, dH;
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setPos(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getW() {
+        return w;
+    }
+
+    public int getH() {
+        return h;
+    }
+
     public ListSelector(int x, int y) {
         contentsList = new ArrayList<>();
         this.x = x;
@@ -42,6 +63,11 @@ public class ListSelector extends AppletObject {
         setDefaultSize();
     }
 
+    public ListSelector setParentBlock(Block parentBlock) {
+        this.parentBlock = parentBlock;
+        return this;
+    }
+
     public ListSelector addContent(String content) {
         contentsList.add(content);
         return this;
@@ -53,7 +79,7 @@ public class ListSelector extends AppletObject {
         for (String content : contentsList) {
             if (content.length() > longContentLength) longContentLength = content.length();
         }
-        setDefaultSize(5 * longContentLength, 10).setSize(dW, dH);
+        setDefaultSize(15 * longContentLength, 25).setSize(dW, dH);
         return this;
     }
 
@@ -74,6 +100,10 @@ public class ListSelector extends AppletObject {
         return this;
     }
 
+    public String getSelectContent() {
+        return contentsList.get(selectContentIndex);
+    }
+
     @Override
     public void display() {
         applet.strokeWeight(1);
@@ -89,9 +119,9 @@ public class ListSelector extends AppletObject {
             applet.fill(0);
             {
                 applet.beginShape();
-                applet.vertex(x + w - 12, y + h / 3);
-                applet.vertex(x + w - 6, y + h / 3);
-                applet.vertex(x + w - 9, y + 2 * h / 3);
+                applet.vertex(x + w - 12, y + h * 4 / 5);
+                applet.vertex(x + w - 6, y + h * 4 / 5);
+                applet.vertex(x + w - 9, y + h * 2 / 5);
                 applet.endShape();
             }
             for (String content : contentsList) {
@@ -109,9 +139,9 @@ public class ListSelector extends AppletObject {
             applet.fill(0);
             {
                 applet.beginShape();
-                applet.vertex(x + w - 12, y + h / 3);
-                applet.vertex(x + w - 6, y + h / 3);
-                applet.vertex(x + w - 9, y + 2 * h / 3);
+                applet.vertex(x + w - 12, y + h * 2 / 5);
+                applet.vertex(x + w - 6, y + h * 2 / 5);
+                applet.vertex(x + w - 9, y + 3 * h / 5);
                 applet.endShape();
             }
         }
