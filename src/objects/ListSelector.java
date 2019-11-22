@@ -132,7 +132,26 @@ public class ListSelector extends AppletObject {
     }
 
     public static void openOrClose() {
-        if (selectListSelector != null) selectListSelector.openFlag = !selectListSelector.openFlag;
+        if (selectListSelector != null) {
+            if (selectListSelector.openFlag) selectListSelector.select();
+            selectListSelector.openFlag = !selectListSelector.openFlag;
+        }
+    }
+
+    private boolean isPressedContent(int index) {
+        return x <= applet.mouseX && applet.mouseX <= x + dW &&
+                y + dH * index <= applet.mouseY && applet.mouseY <= y + dH * (index + 1);
+    }
+
+    private void select() {
+        for (int i = 0; i < contentsList.size(); i++) {
+            if (isPressedContent(i)) {
+                AppletObject.debugLog(String.format("index:%d", i));
+                selectContentIndex = i;
+                return;
+            }
+        }
+        selectContentIndex = 0;
     }
 
     @Override
@@ -141,20 +160,9 @@ public class ListSelector extends AppletObject {
         applet.stroke(100, 100, 100);
         applet.fill(255);
         applet.rect(x, y, dW, dH);
-        applet.fill(0);
-        applet.textAlign(PConstants.CENTER, PConstants.CENTER);  //テキストの描画位置をx,yともに真ん中に
-        applet.textSize(20);
-        applet.text(contentsList.get(selectContentIndex), x + dW / 2, y + dH / 2);
+
         if (openFlag) {
             int i = 0;
-            applet.fill(0);
-            {
-                applet.beginShape();
-                applet.vertex(x + dW - 12, y + dH * 4 / 5);
-                applet.vertex(x + dW - 6, y + dH * 4 / 5);
-                applet.vertex(x + dW - 9, y + dH * 2 / 5);
-                applet.endShape();
-            }
             for (String content : contentsList) {
                 applet.strokeWeight(1);
                 applet.stroke(100, 100, 100);
@@ -167,15 +175,27 @@ public class ListSelector extends AppletObject {
                 applet.text(content, x + dW / 2, y + (dH * i) + dH / 2);
                 i++;
             }
+            applet.fill(0);
+            {
+                applet.beginShape();
+                applet.vertex(x + dW - 12, y + dH * 3 / 5);
+                applet.vertex(x + dW - 6, y + dH * 3 / 5);
+                applet.vertex(x + dW - 9, y + dH * 2 / 5);
+                applet.endShape();
+            }
         } else {
             w = dW;
             h = dH;
+            applet.fill(0);
+            applet.textAlign(PConstants.CENTER, PConstants.CENTER);  //テキストの描画位置をx,yともに真ん中に
+            applet.textSize(20);
+            applet.text(contentsList.get(selectContentIndex), x + dW / 2, y + dH / 2);
             applet.fill(0);
             {
                 applet.beginShape();
                 applet.vertex(x + dW - 12, y + dH * 2 / 5);
                 applet.vertex(x + dW - 6, y + dH * 2 / 5);
-                applet.vertex(x + dW - 9, y + 3 * dH / 5);
+                applet.vertex(x + dW - 9, y + dH * 3 / 5);
                 applet.endShape();
             }
         }
