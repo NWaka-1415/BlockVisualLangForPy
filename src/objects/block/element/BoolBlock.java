@@ -2,8 +2,9 @@ package objects.block.element;
 
 import objects.ListSelector;
 import objects.block.Block;
+import objects.block.IHaveContent;
 
-public class BoolBlock extends Block {
+public class BoolBlock extends Block implements IHaveContent {
 
     private final String[] contents = new String[]{"true", "false"};
     private ListSelector listSelector;
@@ -94,5 +95,21 @@ public class BoolBlock extends Block {
     @Override
     public boolean connectableElement() {
         return false;
+    }
+
+    @Override
+    public boolean isPressedContent() {
+        return listSelector.isPressed();
+    }
+
+    @Override
+    public void setFocusToContent() {
+        listSelector.focus();
+        ListSelector.openOrClose();
+    }
+
+    @Override
+    public boolean haveContent() {
+        return listSelector != null;
     }
 }

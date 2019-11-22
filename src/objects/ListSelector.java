@@ -7,9 +7,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ListSelector extends AppletObject {
+    private static ListSelector selectListSelector = null;
+    private static ArrayList<ListSelector> listSelectors;
+
     private ArrayList<String> contentsList;
     private int selectContentIndex;
     private Block parentBlock;
+    private boolean isFocus;
     private boolean openFlag = false;
 
     private int x, y, w, h;
@@ -41,6 +45,7 @@ public class ListSelector extends AppletObject {
         this.x = x;
         this.y = y;
         selectContentIndex = -1;
+        isFocus = true;
         setDefaultSize();
     }
 
@@ -49,6 +54,7 @@ public class ListSelector extends AppletObject {
         this.contentsList.addAll(Arrays.asList(contentsList));
         this.x = x;
         this.y = y;
+        isFocus = true;
         if (this.contentsList.size() <= 0) return;
         selectContentIndex = 0;
         setDefaultSize();
@@ -58,6 +64,7 @@ public class ListSelector extends AppletObject {
         this.contentsList = contentsList;
         this.x = x;
         this.y = y;
+        isFocus = true;
         if (this.contentsList.size() <= 0) return;
         selectContentIndex = 0;
         setDefaultSize();
@@ -100,8 +107,32 @@ public class ListSelector extends AppletObject {
         return this;
     }
 
+    public ListSelector close() {
+        openFlag = false;
+        return this;
+    }
+
+
     public String getSelectContent() {
         return contentsList.get(selectContentIndex);
+    }
+
+    public void focus() {
+        if (selectListSelector != null) selectListSelector.isFocus = false;
+        isFocus = true;
+        selectListSelector = this;
+    }
+
+    public static void focusOut() {
+        if (selectListSelector != null) {
+            selectListSelector.isFocus = false;
+            selectListSelector.close();
+            selectListSelector = null;
+        }
+    }
+
+    public static void openOrClose() {
+        if (selectListSelector != null) selectListSelector.openFlag = !selectListSelector.openFlag;
     }
 
     @Override
@@ -109,39 +140,42 @@ public class ListSelector extends AppletObject {
         applet.strokeWeight(1);
         applet.stroke(100, 100, 100);
         applet.fill(255);
-        applet.rect(x, y, w, h);
+        applet.rect(x, y, dW, dH);
         applet.fill(0);
         applet.textAlign(PConstants.CENTER, PConstants.CENTER);  //テキストの描画位置をx,yともに真ん中に
         applet.textSize(20);
-        applet.text(contentsList.get(selectContentIndex), x + w / 2, y + h / 2);
+        applet.text(contentsList.get(selectContentIndex), x + dW / 2, y + dH / 2);
         if (openFlag) {
             int i = 0;
             applet.fill(0);
             {
                 applet.beginShape();
-                applet.vertex(x + w - 12, y + h * 4 / 5);
-                applet.vertex(x + w - 6, y + h * 4 / 5);
-                applet.vertex(x + w - 9, y + h * 2 / 5);
+                applet.vertex(x + dW - 12, y + dH * 4 / 5);
+                applet.vertex(x + dW - 6, y + dH * 4 / 5);
+                applet.vertex(x + dW - 9, y + dH * 2 / 5);
                 applet.endShape();
             }
             for (String content : contentsList) {
                 applet.strokeWeight(1);
                 applet.stroke(100, 100, 100);
                 applet.fill(255);
-                applet.rect(x, y + h * i, w, h);
+                applet.rect(x, y + dH * i, dW, dH);
+                h += dH;
                 applet.fill(0);
                 applet.textAlign(PConstants.CENTER, PConstants.CENTER);  //テキストの描画位置をx,yともに真ん中に
                 applet.textSize(20);
-                applet.text(content, x + w / 2, y + h / 2);
+                applet.text(content, x + dW / 2, y + (dH * i) + dH / 2);
                 i++;
             }
         } else {
+            w = dW;
+            h = dH;
             applet.fill(0);
             {
                 applet.beginShape();
-                applet.vertex(x + w - 12, y + h * 2 / 5);
-                applet.vertex(x + w - 6, y + h * 2 / 5);
-                applet.vertex(x + w - 9, y + 3 * h / 5);
+                applet.vertex(x + dW - 12, y + dH * 2 / 5);
+                applet.vertex(x + dW - 6, y + dH * 2 / 5);
+                applet.vertex(x + dW - 9, y + 3 * dH / 5);
                 applet.endShape();
             }
         }

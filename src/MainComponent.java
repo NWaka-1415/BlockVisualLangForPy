@@ -1,7 +1,5 @@
-import objects.block.Block;
-import objects.block.CanIncludeElementBlock;
-import objects.block.InputtableBlock;
-import objects.block.PrintBlockBlock;
+import objects.ListSelector;
+import objects.block.*;
 import objects.block.element.BoolBlock;
 import objects.block.element.IntBlock;
 import objects.AppletObject;
@@ -64,15 +62,13 @@ public class MainComponent extends PApplet {
     public void mousePressed() {
         for (int i = blocks.size() - 1; i >= 0; i--) {
             Block block = blocks.get(i);
-//            if (objects.block instanceof InputtableBlock) {
-//                if (((InputtableBlock) objects.block).isPressedInputField()) {
-//                    ((InputtableBlock) objects.block).inputActivate();
-//                }
-//            }
             if (block.isPressed()) { //マウスがそのブロック内にあれば
                 selectedBlock = block;
                 if (block instanceof InputtableBlock && ((InputtableBlock) block).isPressedInputField()) {
                     ((InputtableBlock) block).setFocusToContent();
+                    selectedBlock = null;
+                } else if (block instanceof IHaveContent && ((IHaveContent) block).isPressedContent()) {
+                    ((IHaveContent) block).setFocusToContent();
                     selectedBlock = null;
                 }
 
@@ -91,8 +87,9 @@ public class MainComponent extends PApplet {
 
                 break;
             }
+            TextField.focusOut();
+            ListSelector.focusOut();
         }
-        TextField.focusOut();
     }
 
     //マウスをドラッグしている間呼ばれる関数

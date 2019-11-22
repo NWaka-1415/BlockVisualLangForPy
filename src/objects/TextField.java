@@ -130,7 +130,10 @@ public class TextField extends AppletObject {
     }
 
     public static void focusOut() {
-        if (selectTextField != null) selectTextField.isFocus = false;
+        if (selectTextField != null) {
+            selectTextField.isFocus = false;
+            selectTextField = null;
+        }
     }
 
     @Override
