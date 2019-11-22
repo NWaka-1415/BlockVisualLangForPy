@@ -150,8 +150,8 @@ public class ComboBox extends AppletObject {
 
     private void select() {
         for (int i = 0; i < contentsList.size(); i++) {
-            AppletObject.debugLog("index:%d", i);
-            AppletObject.debugLog("isPressed(%d) : %b", i, isPressedContent(i));
+//            AppletObject.debugLog("index:%d", i);
+//            AppletObject.debugLog("isPressed(%d) : %b", i, isPressedContent(i));
             if (isPressedContent(i + 1)) {
                 selectContentIndex = i;
                 return;
