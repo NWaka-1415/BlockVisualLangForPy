@@ -65,9 +65,11 @@ public class MainComponent extends PApplet {
             if (block.isPressed()) { //マウスがそのブロック内にあれば
                 selectedBlock = block;
                 if (block instanceof InputtableBlock && ((InputtableBlock) block).isPressedInputField()) {
+                    //入力Field持ちブロック
                     ((InputtableBlock) block).setFocusToContent();
                     selectedBlock = null;
                 } else if (block instanceof IHaveContent && ((IHaveContent) block).isPressedContent()) {
+                    //コンテンツ持ちブロック
                     ((IHaveContent) block).setFocusToContent();
                     selectedBlock = null;
                 }

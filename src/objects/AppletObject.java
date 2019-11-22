@@ -13,6 +13,10 @@ public abstract class AppletObject {
         System.out.println(message);
     }
 
+    public static void debugLog(String message, Object... args) {
+        System.out.println(String.format(message, args));
+    }
+
     public static void debugLog(int message) {
         System.out.println(message);
     }
