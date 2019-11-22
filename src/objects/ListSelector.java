@@ -108,6 +108,7 @@ public class ListSelector extends AppletObject {
     }
 
     public ListSelector close() {
+        AppletObject.debugLog("close()");
         openFlag = false;
         return this;
     }
@@ -125,6 +126,7 @@ public class ListSelector extends AppletObject {
 
     public static void focusOut() {
         if (selectListSelector != null) {
+            selectListSelector.select();
             selectListSelector.isFocus = false;
             selectListSelector.close();
             selectListSelector = null;
@@ -133,7 +135,10 @@ public class ListSelector extends AppletObject {
 
     public static void openOrClose() {
         if (selectListSelector != null) {
-            if (selectListSelector.openFlag) selectListSelector.select();
+            if (selectListSelector.openFlag) {
+                selectListSelector.h = selectListSelector.dH * selectListSelector.contentsList.size();
+                selectListSelector.select();
+            }
             selectListSelector.openFlag = !selectListSelector.openFlag;
         }
     }
@@ -145,8 +150,9 @@ public class ListSelector extends AppletObject {
 
     private void select() {
         for (int i = 0; i < contentsList.size(); i++) {
-            if (isPressedContent(i)) {
-                AppletObject.debugLog(String.format("index:%d", i));
+            AppletObject.debugLog("index:%d", i);
+            AppletObject.debugLog("isPressed(%d) : %b", i, isPressedContent(i));
+            if (isPressedContent(i + 1)) {
                 selectContentIndex = i;
                 return;
             }
@@ -160,16 +166,19 @@ public class ListSelector extends AppletObject {
         applet.stroke(100, 100, 100);
         applet.fill(255);
         applet.rect(x, y, dW, dH);
-
+        applet.fill(0);
+        applet.textAlign(PConstants.CENTER, PConstants.CENTER);  //テキストの描画位置をx,yともに真ん中に
+        applet.textSize(20);
+        applet.text(contentsList.get(selectContentIndex), x + dW / 2, y + dH / 2);
         if (openFlag) {
-            int i = 0;
+            int i = 1;
             for (String content : contentsList) {
                 applet.strokeWeight(1);
                 applet.stroke(100, 100, 100);
                 applet.fill(255);
                 applet.rect(x, y + dH * i, dW, dH);
-                h += dH;
-                applet.fill(0);
+                if (i - 1 == selectContentIndex) applet.fill(0);
+                else applet.fill(115);
                 applet.textAlign(PConstants.CENTER, PConstants.CENTER);  //テキストの描画位置をx,yともに真ん中に
                 applet.textSize(20);
                 applet.text(content, x + dW / 2, y + (dH * i) + dH / 2);
@@ -186,10 +195,7 @@ public class ListSelector extends AppletObject {
         } else {
             w = dW;
             h = dH;
-            applet.fill(0);
-            applet.textAlign(PConstants.CENTER, PConstants.CENTER);  //テキストの描画位置をx,yともに真ん中に
-            applet.textSize(20);
-            applet.text(contentsList.get(selectContentIndex), x + dW / 2, y + dH / 2);
+
             applet.fill(0);
             {
                 applet.beginShape();
