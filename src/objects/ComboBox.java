@@ -6,9 +6,9 @@ import processing.core.PConstants;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ListSelector extends AppletObject {
-    private static ListSelector selectListSelector = null;
-    private static ArrayList<ListSelector> listSelectors;
+public class ComboBox extends AppletObject {
+    private static ComboBox selectComboBox = null;
+    private static ArrayList<ComboBox> comboBox;
 
     private ArrayList<String> contentsList;
     private int selectContentIndex;
@@ -40,7 +40,7 @@ public class ListSelector extends AppletObject {
         return h;
     }
 
-    public ListSelector(int x, int y) {
+    public ComboBox(int x, int y) {
         contentsList = new ArrayList<>();
         this.x = x;
         this.y = y;
@@ -49,7 +49,7 @@ public class ListSelector extends AppletObject {
         setDefaultSize();
     }
 
-    public ListSelector(String[] contentsList, int x, int y) {
+    public ComboBox(String[] contentsList, int x, int y) {
         this.contentsList = new ArrayList<>();
         this.contentsList.addAll(Arrays.asList(contentsList));
         this.x = x;
@@ -60,7 +60,7 @@ public class ListSelector extends AppletObject {
         setDefaultSize();
     }
 
-    public ListSelector(ArrayList<String> contentsList, int x, int y) {
+    public ComboBox(ArrayList<String> contentsList, int x, int y) {
         this.contentsList = contentsList;
         this.x = x;
         this.y = y;
@@ -70,17 +70,17 @@ public class ListSelector extends AppletObject {
         setDefaultSize();
     }
 
-    public ListSelector setParentBlock(Block parentBlock) {
+    public ComboBox setParentBlock(Block parentBlock) {
         this.parentBlock = parentBlock;
         return this;
     }
 
-    public ListSelector addContent(String content) {
+    public ComboBox addContent(String content) {
         contentsList.add(content);
         return this;
     }
 
-    public ListSelector setDefaultSize() {
+    public ComboBox setDefaultSize() {
         if (contentsList.size() <= 0) return this;
         int longContentLength = 0;
         for (String content : contentsList) {
@@ -90,24 +90,24 @@ public class ListSelector extends AppletObject {
         return this;
     }
 
-    public ListSelector setDefaultSize(int w, int h) {
+    public ComboBox setDefaultSize(int w, int h) {
         dW = w;
         dH = h;
         return this;
     }
 
-    public ListSelector setSize(int w, int h) {
+    public ComboBox setSize(int w, int h) {
         this.w = w;
         this.h = h;
         return this;
     }
 
-    public ListSelector open() {
+    public ComboBox open() {
         openFlag = true;
         return this;
     }
 
-    public ListSelector close() {
+    public ComboBox close() {
         AppletObject.debugLog("close()");
         openFlag = false;
         return this;
@@ -119,27 +119,27 @@ public class ListSelector extends AppletObject {
     }
 
     public void focus() {
-        if (selectListSelector != null) selectListSelector.isFocus = false;
+        if (selectComboBox != null) selectComboBox.isFocus = false;
         isFocus = true;
-        selectListSelector = this;
+        selectComboBox = this;
     }
 
     public static void focusOut() {
-        if (selectListSelector != null) {
-            selectListSelector.select();
-            selectListSelector.isFocus = false;
-            selectListSelector.close();
-            selectListSelector = null;
+        if (selectComboBox != null) {
+            selectComboBox.select();
+            selectComboBox.isFocus = false;
+            selectComboBox.close();
+            selectComboBox = null;
         }
     }
 
     public static void openOrClose() {
-        if (selectListSelector != null) {
-            if (selectListSelector.openFlag) {
-                selectListSelector.h = selectListSelector.dH * selectListSelector.contentsList.size();
-                selectListSelector.select();
+        if (selectComboBox != null) {
+            if (selectComboBox.openFlag) {
+                selectComboBox.h = selectComboBox.dH * selectComboBox.contentsList.size();
+                selectComboBox.select();
             }
-            selectListSelector.openFlag = !selectListSelector.openFlag;
+            selectComboBox.openFlag = !selectComboBox.openFlag;
         }
     }
 

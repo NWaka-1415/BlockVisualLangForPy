@@ -1,4 +1,4 @@
-import objects.ListSelector;
+import objects.ComboBox;
 import objects.block.*;
 import objects.block.element.BoolBlock;
 import objects.block.element.IntBlock;
@@ -90,7 +90,7 @@ public class MainComponent extends PApplet {
                 break;
             }
             TextField.focusOut();
-            ListSelector.focusOut();
+            ComboBox.focusOut();
         }
     }
 
