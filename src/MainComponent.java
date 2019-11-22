@@ -138,6 +138,7 @@ public class MainComponent extends PApplet {
     public void keyPressed() {
         System.out.println(key);
         TextField.set(key);
+        changeCode();
         if (key == 'p') blocks.add(new PrintBlockBlock(mouseX, mouseY));
         else if (key == 'i') blocks.add(new IntBlock(mouseX, mouseY));
         else if (key == 'b') blocks.add(new BoolBlock(mouseX, mouseY));
