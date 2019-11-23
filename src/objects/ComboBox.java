@@ -16,6 +16,10 @@ public class ComboBox extends AppletObject {
     private boolean isFocus;
     private boolean openFlag = false;
 
+    public boolean openFlag() {
+        return openFlag;
+    }
+
     private int x, y, w, h;
     private int dW, dH;
 
@@ -119,7 +123,10 @@ public class ComboBox extends AppletObject {
     }
 
     public void focus() {
-        if (selectComboBox != null) selectComboBox.isFocus = false;
+        if (selectComboBox != null) {
+            selectComboBox.close();
+            selectComboBox.isFocus = false;
+        }
         isFocus = true;
         selectComboBox = this;
     }
@@ -141,6 +148,10 @@ public class ComboBox extends AppletObject {
             }
             selectComboBox.openFlag = !selectComboBox.openFlag;
         }
+    }
+
+    public static void selectDisplay() {
+        if (selectComboBox != null) selectComboBox.display();
     }
 
     private boolean isPressedContent(int index) {

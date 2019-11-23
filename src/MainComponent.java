@@ -56,13 +56,28 @@ public class MainComponent extends PApplet {
         for (Block block : blocks) {
             block.display();
         }
+        ComboBox.selectDisplay();
+        sortDisplay();
+    }
+
+    private void sortDisplay() {
+        if (selectedBlock == null) return;
+        Block nIncludeBlock = null;
+        if (selectedBlock instanceof CanIncludeElementBlock
+                && ((CanIncludeElementBlock) selectedBlock).includeBlock != null) {
+            nIncludeBlock = ((CanIncludeElementBlock) selectedBlock).includeBlock;
+        }
+        selectedBlock.display();
+        if (nIncludeBlock != null) nIncludeBlock.display();
     }
 
     //マウスが押されたときに呼ばれる関数
     public void mousePressed() {
+        boolean select = false;
         for (int i = blocks.size() - 1; i >= 0; i--) {
             Block block = blocks.get(i);
             if (block.isPressed()) { //マウスがそのブロック内にあれば
+                select = true;
                 selectedBlock = block;
                 if (block instanceof InputtableBlock && ((InputtableBlock) block).isPressedInputField()) {
                     //入力Field持ちブロック
@@ -89,6 +104,10 @@ public class MainComponent extends PApplet {
 
                 break;
             }
+
+        }
+        if (!select) {
+            //選ばれたブロックが1つもなければ
             TextField.focusOut();
             ComboBox.focusOut();
         }
