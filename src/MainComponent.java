@@ -92,6 +92,7 @@ public class MainComponent extends PApplet {
             TextField.focusOut();
             ComboBox.focusOut();
         }
+        changeCode();
     }
 
     //マウスをドラッグしている間呼ばれる関数
@@ -109,7 +110,7 @@ public class MainComponent extends PApplet {
                     block.connectPostBlock(selectedBlock);  //ブロックの接続
                 }
                 if (selectedBlock != block && block.canConnectElement(selectedBlock)) {
-                    block.enterBlock(selectedBlock);
+                    block.enterBlock(selectedBlock); //blockがselectedBlockを入れられるなら入れる
                 }
             }
 
@@ -127,7 +128,6 @@ public class MainComponent extends PApplet {
                 }
             }
             selectedBlock.connect();
-            changeCode();
 
             selectedBlock = null;   //ドラッグ終了のため選択されたブロックは必ずnullに
         }

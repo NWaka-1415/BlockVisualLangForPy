@@ -94,7 +94,7 @@ public class BoolBlock extends Block implements IHaveContent {
 
     @Override
     public boolean connectableElement() {
-        return false;
+        return true;
     }
 
     @Override
