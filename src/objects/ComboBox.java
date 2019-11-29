@@ -148,10 +148,10 @@ public class ComboBox extends AppletObject {
                 selectComboBox.select();
             }
             selectComboBox.openFlag = !selectComboBox.openFlag;
-            debugLog("OpenFlag before OoC : %b", selectComboBox.openFlag);
+//            debugLog("OpenFlag before OoC : %b", selectComboBox.openFlag);
             if (selectComboBox.openFlag) selectComboBox.open();
             else selectComboBox.close();
-            debugLog("OpenFlag end of open or close : %b", selectComboBox.openFlag);
+//            debugLog("OpenFlag end of open or close : %b", selectComboBox.openFlag);
         }
     }
 
@@ -165,7 +165,7 @@ public class ComboBox extends AppletObject {
     }
 
     private void select() {
-        debugLog("select()");
+//        debugLog("select()");
         for (int i = 0; i < contentsList.size(); i++) {
 //            AppletObject.debugLog("index:%d", i);
 //            AppletObject.debugLog("isPressed(%d) : %b", i, isPressedContent(i));
