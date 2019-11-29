@@ -3,7 +3,7 @@ package objects.block;
 import objects.TextField;
 
 
-public abstract class InputtableBlock extends Block {
+public abstract class InputtableBlock extends Block implements IHaveContent {
     protected String content;
     //    private JTextField textField;
     protected TextField textField;
@@ -56,10 +56,12 @@ public abstract class InputtableBlock extends Block {
         content = textField.getText();
     }
 
-    public boolean isPressedInputField() {
+    @Override
+    public boolean isPressedContent() {
         return textField.isPressed();
     }
 
+    @Override
     public void setFocusToContent() {
         textField.focus();
     }
@@ -69,5 +71,10 @@ public abstract class InputtableBlock extends Block {
         applet.stroke(100, 100, 100);
         applet.fill(255);
         applet.rect(x, y, w, h);
+    }
+
+    @Override
+    public boolean haveContent() {
+        return textField != null;
     }
 }
