@@ -109,6 +109,11 @@ public class BoolBlock extends Block implements IHaveContent {
     }
 
     @Override
+    public boolean isPressed() {
+        return super.isPressed() || comboBox.isPressed();
+    }
+
+    @Override
     public boolean haveContent() {
         return comboBox != null;
     }

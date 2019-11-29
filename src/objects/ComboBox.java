@@ -108,12 +108,14 @@ public class ComboBox extends AppletObject {
 
     public ComboBox open() {
         openFlag = true;
+        h = dH * (contentsList.size() + 1);
         return this;
     }
 
     public ComboBox close() {
         AppletObject.debugLog("close()");
         openFlag = false;
+        h = dH;
         return this;
     }
 
@@ -123,7 +125,7 @@ public class ComboBox extends AppletObject {
     }
 
     public void focus() {
-        if (selectComboBox != null) {
+        if (selectComboBox != null && selectComboBox != this) {
             selectComboBox.close();
             selectComboBox.isFocus = false;
         }
@@ -133,7 +135,7 @@ public class ComboBox extends AppletObject {
 
     public static void focusOut() {
         if (selectComboBox != null) {
-            selectComboBox.select();
+//            selectComboBox.select();
             selectComboBox.isFocus = false;
             selectComboBox.close();
             selectComboBox = null;
@@ -143,10 +145,13 @@ public class ComboBox extends AppletObject {
     public static void openOrClose() {
         if (selectComboBox != null) {
             if (selectComboBox.openFlag) {
-                selectComboBox.h = selectComboBox.dH * selectComboBox.contentsList.size();
                 selectComboBox.select();
             }
             selectComboBox.openFlag = !selectComboBox.openFlag;
+            debugLog("OpenFlag before OoC : %b", selectComboBox.openFlag);
+            if (selectComboBox.openFlag) selectComboBox.open();
+            else selectComboBox.close();
+            debugLog("OpenFlag end of open or close : %b", selectComboBox.openFlag);
         }
     }
 
@@ -160,6 +165,7 @@ public class ComboBox extends AppletObject {
     }
 
     private void select() {
+        debugLog("select()");
         for (int i = 0; i < contentsList.size(); i++) {
 //            AppletObject.debugLog("index:%d", i);
 //            AppletObject.debugLog("isPressed(%d) : %b", i, isPressedContent(i));
@@ -204,6 +210,7 @@ public class ComboBox extends AppletObject {
                 applet.endShape();
             }
         } else {
+//            debugLog("else");
             w = dW;
             h = dH;
 

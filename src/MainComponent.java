@@ -84,6 +84,7 @@ public class MainComponent extends PApplet {
                     ((InputtableBlock) block).setFocusToContent();
                     selectedBlock = null;
                 } else if (block instanceof IHaveContent && ((IHaveContent) block).isPressedContent()) {
+                    AppletObject.debugLog("isPressedContent:%b", ((IHaveContent) block).isPressedContent());
                     //コンテンツ持ちブロック
                     ((IHaveContent) block).setFocusToContent();
                     selectedBlock = null;
@@ -187,7 +188,7 @@ public class MainComponent extends PApplet {
         for (Block topBlock : topBlocks) {
             code += topBlock.code();
         }
-        System.out.println(code);
+//        System.out.println(code);
         codeTextArea.setText(code);
     }
 }
