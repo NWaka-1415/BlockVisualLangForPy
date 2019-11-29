@@ -1,3 +1,5 @@
+import objects.component.MainComponent;
+
 import javax.swing.*;
 import java.awt.*;
 

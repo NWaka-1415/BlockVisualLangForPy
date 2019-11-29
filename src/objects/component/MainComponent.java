@@ -1,3 +1,5 @@
+package objects.component;
+
 import objects.ComboBox;
 import objects.block.*;
 import objects.block.element.BoolBlock;
@@ -12,7 +14,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class MainComponent extends PApplet {
-    Canvas canvas;
+    public Canvas canvas;
     private ArrayList<Block> blocks;
     private Block selectedBlock;
     private String code;
@@ -69,6 +71,15 @@ public class MainComponent extends PApplet {
         }
         selectedBlock.display();
         if (nIncludeBlock != null) nIncludeBlock.display();
+    }
+
+    public void setTopBlock(Block block) {
+        ArrayList<Block> tmpBlocks = new ArrayList<>();
+        for (Block bl : blocks) {
+            if (bl != block) tmpBlocks.add(bl);
+        }
+        blocks = tmpBlocks;
+        blocks.add(block);
     }
 
     //マウスが押されたときに呼ばれる関数

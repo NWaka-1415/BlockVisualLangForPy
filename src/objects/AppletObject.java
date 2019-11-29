@@ -1,11 +1,11 @@
 package objects;
 
-import processing.core.PApplet;
+import objects.component.MainComponent;
 
 public abstract class AppletObject {
-    protected static PApplet applet = null;
+    protected static MainComponent applet = null;
 
-    public static void setApplet(PApplet applet) {
+    public static void setApplet(MainComponent applet) {
         AppletObject.applet = applet;
     }
 

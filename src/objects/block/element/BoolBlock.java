@@ -105,6 +105,7 @@ public class BoolBlock extends Block implements IHaveContent {
     @Override
     public void setFocusToContent() {
         comboBox.focus();
+        applet.setTopBlock(this);
         ComboBox.openOrClose();
     }
 
