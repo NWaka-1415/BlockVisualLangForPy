@@ -201,7 +201,6 @@ public class MainComponent extends PApplet {
                 topBlocks.add(block);
             }
         }
-//        code = "#code-----------------\n";
         code = "";
         for (Block topBlock : topBlocks) {
             code += topBlock.code();

@@ -63,7 +63,9 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent {
     public void setFocusToContent() {
         comboBox.focus();
         applet.setTopBlock(this);
-        for (IncludeField includeField : includeFields) applet.setTopBlock(includeField.includeBlock());
+        for (IncludeField includeField : includeFields) {
+            if (includeField.includeBlock() != null) applet.setTopBlock(includeField.includeBlock());
+        }
         ComboBox.openOrClose();
     }
 
