@@ -16,17 +16,19 @@ public abstract class CanBeEnclosedBlock extends Block {
         super(name, x, y);
     }
 
-    public void encloseBlock(Block block){
-        if(!block.connectable()) return;
-        if(this.encloseBlock!=null) return;
-        this.encloseBlock=block;
-        block.prevBlock=this;
+    public void encloseBlock(Block block) {
+        if (!block.connectable()) return;
+        if (this.encloseBlock != null) return;
+        this.encloseBlock = block;
+        block.prevBlock = this;
 
 
     }
 
-    private void encloseDisplay(Block block){
-        int addX=this.x
+    private void encloseDisplay(Block block) {
+        int addX = this.x - block.x;
+        int addY = (this.y + this.h) - block.y;
+        block.move(addX, addY);
     }
 
     @Override
