@@ -3,6 +3,7 @@ package objects.component;
 import objects.ComboBox;
 import objects.block.*;
 import objects.block.element.BoolBlock;
+import objects.block.element.ConditionalExpressionBlock;
 import objects.block.element.IntBlock;
 import objects.AppletObject;
 import objects.TextField;
@@ -168,6 +169,7 @@ public class MainComponent extends PApplet {
         if (key == 'p') blocks.add(new PrintBlockBlock(mouseX, mouseY));
         else if (key == 'i') blocks.add(new IntBlock(mouseX, mouseY));
         else if (key == 'b') blocks.add(new BoolBlock(mouseX, mouseY));
+        else if (key == 'c') blocks.add(new ConditionalExpressionBlock(mouseX, mouseY));
         switch (keyCode) {
             case BACKSPACE:
                 TextField.minusSet();
