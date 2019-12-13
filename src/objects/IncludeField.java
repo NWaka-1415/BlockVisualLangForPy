@@ -119,7 +119,9 @@ public class IncludeField extends AppletObject {
     }
 
     public void outBlock() {
-        debugLog("include:%b", includeBlock != null);
+        debugLog("includeFlag:%b", includeFlag);
+        if (includeFlag) return;
+        debugLog("None return");
         includeBlock.parentBlock = null;
         includeBlock = null;
         resetSize();

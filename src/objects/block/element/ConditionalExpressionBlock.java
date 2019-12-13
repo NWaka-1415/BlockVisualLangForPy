@@ -63,6 +63,7 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent {
     public void setFocusToContent() {
         comboBox.focus();
         applet.setTopBlock(this);
+        for (IncludeField includeField : includeFields) applet.setTopBlock(includeField.includeBlock());
         ComboBox.openOrClose();
     }
 
@@ -113,8 +114,14 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent {
                     && includeField.includeFlag()) {
                 includeField.enterBlock(block);
                 block.parentBlock = this;
-                this.w = w + block.w;
             }
+        }
+        if (includeFields[0].includeBlock() != null && includeFields[1].includeBlock() != null) {
+            w = getDw() + includeFields[0].getW() + includeFields[1].getW();
+        } else if (includeFields[0].includeBlock() != null) {
+            w = getDw() + includeFields[0].getW();
+        } else if (includeFields[1].includeBlock() != null) {
+            w = getDw() + includeFields[1].getW();
         }
     }
 
@@ -133,7 +140,7 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent {
     @Override
     public void outBlock() {
         for (IncludeField includeField : includeFields) {
-            if (!includeField.includeFlag()) includeField.outBlock();
+            includeField.outBlock();
         }
         w = getDw();
         h = getDh();
