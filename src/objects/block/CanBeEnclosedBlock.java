@@ -3,6 +3,11 @@ package objects.block;
 public abstract class CanBeEnclosedBlock extends Block {
     //中に入っているブロック一個目
     protected Block encloseBlock;
+    private int topBlockH;
+
+    public int getTopBlockH() {
+        return topBlockH;
+    }
 
     public CanBeEnclosedBlock(String name, int x, int y, int w, int h) {
         super(name, x, y, w, h);
@@ -21,8 +26,6 @@ public abstract class CanBeEnclosedBlock extends Block {
         if (this.encloseBlock != null) return;
         this.encloseBlock = block;
         block.prevBlock = this;
-
-
     }
 
     private void encloseDisplay(Block block) {
@@ -33,6 +36,14 @@ public abstract class CanBeEnclosedBlock extends Block {
 
     @Override
     public void display() {
-
+        if (encloseBlock != null) {
+            int addH = 0;
+            Block block = encloseBlock;
+            while (block != null) {
+                addH += block.h;
+                block = block.postBlock;
+            }
+            h = getDh() + addH;
+        }
     }
 }
