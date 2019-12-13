@@ -1,6 +1,7 @@
 package objects.component;
 
 import objects.ComboBox;
+import objects.IncludeField;
 import objects.block.*;
 import objects.block.element.BoolBlock;
 import objects.block.element.ConditionalExpressionBlock;
@@ -13,6 +14,7 @@ import processing.core.PSurface;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainComponent extends PApplet {
     public Canvas canvas;
@@ -45,7 +47,7 @@ public class MainComponent extends PApplet {
         TextField.initialize();
         code = "";
         blocks = new ArrayList<>();
-        blocks.add(new PrintBlockBlock(500, 250));
+        blocks.add(new PrintBlockBlock(250, 250));
     }
 
     @Override
@@ -65,13 +67,19 @@ public class MainComponent extends PApplet {
 
     private void sortDisplay() {
         if (selectedBlock == null) return;
-        Block nIncludeBlock = null;
+        ArrayList<Block> nIncludeBlocks = new ArrayList<>();
         if (selectedBlock instanceof CanIncludeElementBlock
                 && ((CanIncludeElementBlock) selectedBlock).includeBlock != null) {
-            nIncludeBlock = ((CanIncludeElementBlock) selectedBlock).includeBlock;
+            nIncludeBlocks.add(((CanIncludeElementBlock) selectedBlock).includeBlock);
+        } else if (selectedBlock instanceof ConditionalExpressionBlock) {
+            for (IncludeField includeField : ((ConditionalExpressionBlock) selectedBlock).includeFields) {
+                if (includeField.includeBlock() != null) nIncludeBlocks.add(includeField.includeBlock());
+            }
         }
         selectedBlock.display();
-        if (nIncludeBlock != null) nIncludeBlock.display();
+        for (Block block : nIncludeBlocks) {
+            block.display();
+        }
     }
 
     public void setTopBlock(Block block) {
@@ -148,7 +156,7 @@ public class MainComponent extends PApplet {
                 }
             }
             //選択しているブロックの親が内包可能ブロックである
-            if (selectedBlock.parentBlock instanceof CanIncludeElementBlock) {
+            if (selectedBlock.parentBlock instanceof CanIncludeElementBlock || selectedBlock.parentBlock instanceof ConditionalExpressionBlock) {
                 if (!selectedBlock.parentBlock.canConnectElement(selectedBlock)) {
                     selectedBlock.parentBlock.outBlock();
                 } else {
@@ -193,11 +201,11 @@ public class MainComponent extends PApplet {
                 topBlocks.add(block);
             }
         }
-        code = "#code-----------------\n";
+//        code = "#code-----------------\n";
+        code = "";
         for (Block topBlock : topBlocks) {
             code += topBlock.code();
         }
-//        System.out.println(code);
         codeTextArea.setText(code);
     }
 }

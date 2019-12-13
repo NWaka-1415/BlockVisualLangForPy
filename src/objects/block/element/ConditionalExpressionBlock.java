@@ -41,9 +41,8 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent {
                     .setPos(count == 0 ? x + 5 : x + w - 5 - includeField.getW() / 2, y + h / 10);
             count++;
         }
-        comboBox.setPos(x + getDw() / 2, comboBox.getY() + 5);
-
         setDefaultSize(w, h);
+        comboBox.setPos(x + getDw() / 2 - comboBox.getW() / 2, comboBox.getY() + 5);
     }
 
     @Override
@@ -74,6 +73,13 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent {
 
     @Override
     public void display() {
+        int count = 0;
+        for (IncludeField includeField : includeFields) {
+            includeField.setPos(count == 0 ? x + 5 : x + w - 5 - includeField.getW() / 2, y + h / 10);
+            count++;
+        }
+        comboBox.setPos(x + w / 2 - comboBox.getW() / 2, comboBox.getY());
+
         applet.strokeWeight(3);
         applet.stroke(90, 0, 180);
         applet.fill(128, 0, 225);
@@ -102,10 +108,12 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent {
     @Override
     public void enterBlock(Block block) {
         for (IncludeField includeField : includeFields) {
-            if (includeField.includeBlock() != null && includeField.includeFlag()) {
+            if (includeField.includeBlock() == null
+                    && block.parentBlock == null
+                    && includeField.includeFlag()) {
                 includeField.enterBlock(block);
                 block.parentBlock = this;
-                this.w = getDw() + block.w;
+                this.w = w + block.w;
             }
         }
     }
@@ -134,8 +142,6 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent {
     @Override
     public boolean canConnectElement(Block block) {
         if (!block.connectableElement()) return false;
-        int bx = block.x;
-        int by = block.y;
         boolean result;
         for (IncludeField includeField : includeFields) {
             result = includeField.canIncludeBlock(block);

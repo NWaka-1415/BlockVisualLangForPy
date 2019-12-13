@@ -80,8 +80,7 @@ public class IncludeField extends AppletObject {
 
     public void enterBlock(Block block) {
         includeBlock = block;
-
-        this.w = dW + block.w;
+        this.w = block.w;
 
         enterDisplay(block);
     }
@@ -116,9 +115,11 @@ public class IncludeField extends AppletObject {
     public void move(int addX, int addY) {
         x += addX;
         y += addY;
+        if (includeBlock != null) includeBlock.move(addX, addY);
     }
 
     public void outBlock() {
+        debugLog("include:%b", includeBlock != null);
         includeBlock.parentBlock = null;
         includeBlock = null;
         resetSize();
