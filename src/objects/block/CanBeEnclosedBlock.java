@@ -3,7 +3,15 @@ package objects.block;
 public abstract class CanBeEnclosedBlock extends Block {
     //中に入っているブロック一個目
     protected Block encloseBlock;
-    private int topBlockH;
+    private int topBlockH, encloseX, encloseY;
+
+    public int getEncloseX() {
+        return encloseX;
+    }
+
+    public int getEncloseY() {
+        return encloseY;
+    }
 
     public int getTopBlockH() {
         return topBlockH;
