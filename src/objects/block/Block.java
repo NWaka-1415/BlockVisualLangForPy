@@ -9,7 +9,7 @@ public abstract class Block extends AppletObject {
     protected String name;
     private String code;
     private int dw, dh;//デフォルトサイズ
-    protected int x, y, w, h;
+    public int x, y, w, h;
     public Block prevBlock;
     public Block postBlock;
     public Block parentBlock;
@@ -131,6 +131,11 @@ public abstract class Block extends AppletObject {
         this.w = w;
         this.h = h;
         if (parentBlock != null) parentBlock.setSize(parentBlock.getDw() + w, parentBlock.getDh());
+    }
+
+    public void setDefaultSize(int w, int h) {
+        dw = w;
+        dh = h;
     }
 
     public void resetSize() {
