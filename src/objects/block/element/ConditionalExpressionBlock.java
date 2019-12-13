@@ -78,11 +78,19 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent {
     public void display() {
         int count = 0;
         for (IncludeField includeField : includeFields) {
-            includeField.setPos(count == 0 ? x + 5 : x + w - 5 - includeField.getW() / 2, y + h / 10);
+            includeField.setPos(count == 0 ? x + 5 : x + w - 5 - includeField.getW(), y + h / 10);
             count++;
         }
-        comboBox.setPos(x + w / 2 - comboBox.getW() / 2, comboBox.getY());
 
+        if (includeFields[0].includeBlock() != null && includeFields[1].includeBlock() != null) {
+            comboBox.setPos(x + w / 2 - comboBox.getW() / 2, comboBox.getY());
+        } else if (includeFields[0].includeBlock() != null) {
+            comboBox.setPos(x + w / 2 - comboBox.getW() / 2, comboBox.getY());
+        } else if (includeFields[1].includeBlock() != null) {
+            comboBox.setPos(x + getDw() / 2 - comboBox.getW() / 2, comboBox.getY());
+        } else {
+            comboBox.setPos(x + w / 2 - comboBox.getW() / 2, comboBox.getY());
+        }
         applet.strokeWeight(3);
         applet.stroke(90, 0, 180);
         applet.fill(128, 0, 225);
