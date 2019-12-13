@@ -43,6 +43,13 @@ public abstract class CanBeEnclosedBlock extends Block {
     }
 
     @Override
+    public void move(int addX, int addY) {
+        super.move(addX, addY);
+        encloseX += addX;
+        encloseY += addY;
+    }
+
+    @Override
     public void display() {
         if (encloseBlock != null) {
             int addH = 0;
