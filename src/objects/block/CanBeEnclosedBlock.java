@@ -1,6 +1,9 @@
 package objects.block;
 
 public abstract class CanBeEnclosedBlock extends Block {
+    //中に入っているブロック一個目
+    protected Block encloseBlock;
+
     public CanBeEnclosedBlock(String name, int x, int y, int w, int h) {
         super(name, x, y, w, h);
     }
@@ -13,53 +16,21 @@ public abstract class CanBeEnclosedBlock extends Block {
         super(name, x, y);
     }
 
+    public void encloseBlock(Block block){
+        if(!block.connectable()) return;
+        if(this.encloseBlock!=null) return;
+        this.encloseBlock=block;
+        block.prevBlock=this;
+
+
+    }
+
+    private void encloseDisplay(Block block){
+        int addX=this.x
+    }
+
     @Override
     public void display() {
 
-    }
-
-    @Override
-    public void exchangeCode() {
-
-    }
-
-    @Override
-    public boolean canConnect(Block block) {
-        return false;
-    }
-
-    @Override
-    public boolean connectable() {
-        return false;
-    }
-
-    @Override
-    public void enterBlock(Block block) {
-
-    }
-
-    @Override
-    public void enter() {
-
-    }
-
-    @Override
-    protected void enterDisplay(Block block) {
-
-    }
-
-    @Override
-    public void outBlock() {
-
-    }
-
-    @Override
-    public boolean canConnectElement(Block block) {
-        return false;
-    }
-
-    @Override
-    public boolean connectableElement() {
-        return false;
     }
 }
