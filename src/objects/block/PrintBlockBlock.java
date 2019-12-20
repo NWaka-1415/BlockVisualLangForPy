@@ -30,10 +30,13 @@ public class PrintBlockBlock extends CanIncludeElementBlock {
 
     @Override
     public void exchangeCode() {
-        if (includeBlock == null) setCode(name + "()");
-        else setCode(name + "(" + includeBlock.code() + ")");
+        String option = "";
+        if (codeOption != null) option = codeOption.option();
+
+        if (includeBlock == null) setCode(option + name + "()");
+        else setCode(option + name + "(" + includeBlock.code() + ")");
         if (postBlock == null) return;
-        addCode("\n" + postBlock.code());
+        addCode(option + "\n" + postBlock.code());
     }
 
     @Override

@@ -1,13 +1,16 @@
 package objects.block;
 
 import objects.AppletObject;
+import objects.block.codeOption.ICodeOption;
 import processing.core.PSurface;
 
 public abstract class Block extends AppletObject {
     //    protected static PApplet applet = null;
     protected static PSurface surface = null;
     protected String name;
+    protected String displayName;
     private String code;
+    protected ICodeOption codeOption;
     private int dw, dh;//デフォルトサイズ
     public int x, y, w, h;
     public Block prevBlock;
@@ -19,6 +22,11 @@ public abstract class Block extends AppletObject {
     public String code() {
         exchangeCode();
         return code;
+    }
+
+    public String code(ICodeOption codeOption) {
+        this.codeOption = codeOption;
+        return code();
     }
 
     public int getDw() {

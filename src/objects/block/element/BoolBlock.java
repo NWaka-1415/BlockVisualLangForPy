@@ -54,7 +54,10 @@ public class BoolBlock extends Block implements IHaveContent {
 
     @Override
     public void exchangeCode() {
-        setCode(comboBox.getSelectContent());
+        String option = "";
+        if (codeOption != null) option = codeOption.option();
+
+        setCode(option + comboBox.getSelectContent());
     }
 
     @Override

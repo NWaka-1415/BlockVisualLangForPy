@@ -32,7 +32,10 @@ public class IntBlock extends InputtableBlock {
 
     @Override
     public void exchangeCode() {
-        setCode(content);
+        String option = "";
+        if (codeOption != null) option = codeOption.option();
+
+        setCode(option + content);
     }
 
     @Override
