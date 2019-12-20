@@ -38,8 +38,8 @@ public class WhileLoopBlock extends CanBeEnclosedBlock {
     public void display() {
         super.display();
         applet.strokeWeight(3);
-        applet.stroke(0, 188, 166);
-        applet.fill(0, 224, 194);
+        applet.stroke(0, 224, 194);
+        applet.fill(0, 188, 166);
         Block.createEncloseBlock(x, y, w, h, internalW, internalH);
         applet.fill(255);
         applet.textAlign(PConstants.CENTER, PConstants.CENTER);

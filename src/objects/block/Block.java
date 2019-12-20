@@ -121,8 +121,8 @@ public abstract class Block extends AppletObject {
             applet.vertex(x + internalW + mainCurve + 10 + connectWidth, y + internalH);
             applet.vertex(x + internalW + mainCurve + 10 + connectWidth / 2, y + internalH + connectHeight);
             applet.vertex(x + internalW + mainCurve + 10, y + internalH);
-            applet.vertex(x + internalW, y + internalH);
-            applet.vertex(x + internalW, y + h - internalH);
+            applet.vertex(x + internalW + 5, y + internalH);
+            applet.vertex(x + internalW + 5, y + h - internalH);
             applet.vertex(x + w - 1, y + h - internalH);
             applet.vertex(x + w, y + h - internalH + 1);
             applet.vertex(x + w, y + h - 1);
