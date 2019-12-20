@@ -104,6 +104,40 @@ public abstract class Block extends AppletObject {
         applet.endShape();
     }
 
+    public static void createEncloseBlock(int x, int y, int w, int h, int internalW, int internalH) {
+        int mainCurve = 6;
+        int connectWidth = 25;
+        int connectHeight = 15;
+        applet.beginShape();
+        {
+            applet.vertex(x + mainCurve, y);
+            applet.vertex(x + mainCurve + 10, y);
+            applet.vertex(x + mainCurve + 10 + connectWidth / 2, y + connectHeight);
+            applet.vertex(x + mainCurve + 10 + connectWidth, y);
+            applet.vertex(x + w - 1, y);
+            applet.vertex(x + w, y + 1);
+            applet.vertex(x + w, y + internalH - 1);
+            applet.vertex(x + w - 1, y + internalH);
+            applet.vertex(x + internalW + mainCurve + 10 + connectWidth, y + internalH);
+            applet.vertex(x + internalW + mainCurve + 10 + connectWidth / 2, y + internalH + connectHeight);
+            applet.vertex(x + internalW + mainCurve + 10, y + internalH);
+            applet.vertex(x + internalW, y + internalH);
+            applet.vertex(x + internalW, y + h - internalH);
+            applet.vertex(x + w - 1, y + h - internalH);
+            applet.vertex(x + w, y + h - internalH + 1);
+            applet.vertex(x + w, y + h - 1);
+            applet.vertex(x + w - 1, y + h);
+            applet.vertex(x + mainCurve + 10 + connectWidth, y + h);
+            applet.vertex(x + mainCurve + 10 + connectWidth / 2, y + h + connectHeight);
+            applet.vertex(x + mainCurve + 10, y + h);
+            applet.vertex(x + mainCurve, y + h);
+            applet.vertex(x, y + h - mainCurve);
+            applet.vertex(x, y + mainCurve);
+            applet.vertex(x + mainCurve, y);
+        }
+        applet.endShape();
+    }
+
     //描画部をここに記述
     abstract public void display();
 

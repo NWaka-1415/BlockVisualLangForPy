@@ -5,30 +5,28 @@ import objects.block.codeOption.Nest;
 public abstract class CanBeEnclosedBlock extends Block {
     //中に入っているブロック一個目
     protected Block encloseBlock;
-    private int topBlockH, encloseX, encloseY;
+    protected int internalW, internalH;
 
-    public int getEncloseX() {
-        return encloseX;
+    public int getInternalH() {
+        return internalH;
     }
 
-    public int getEncloseY() {
-        return encloseY;
-    }
-
-    public int getTopBlockH() {
-        return topBlockH;
-    }
-
-    public CanBeEnclosedBlock(String name, int x, int y, int w, int h) {
+    public CanBeEnclosedBlock(String name, int x, int y, int w, int h, int internalW, int internalH) {
         super(name, x, y, w, h);
+        this.internalW = internalW;
+        this.internalH = internalH;
     }
 
     public CanBeEnclosedBlock(String name, int x, int y, int w) {
-        super(name, x, y, w);
+        super(name, x, y, w, 170);
+        internalW = 50;
+        internalH = 50;
     }
 
     public CanBeEnclosedBlock(String name, int x, int y) {
-        super(name, x, y);
+        super(name, x, y, 120, 170);
+        internalW = 50;
+        internalH = 50;
     }
 
     public void encloseBlock(Block block) {
@@ -42,13 +40,6 @@ public abstract class CanBeEnclosedBlock extends Block {
         int addX = this.x - block.x;
         int addY = (this.y + this.h) - block.y;
         block.move(addX, addY);
-    }
-
-    @Override
-    public void move(int addX, int addY) {
-        super.move(addX, addY);
-        encloseX += addX;
-        encloseY += addY;
     }
 
     @Override
