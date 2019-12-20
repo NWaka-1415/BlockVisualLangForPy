@@ -14,7 +14,6 @@ import processing.core.PSurface;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainComponent extends PApplet {
     public Canvas canvas;
