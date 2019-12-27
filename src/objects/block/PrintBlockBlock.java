@@ -32,9 +32,7 @@ public class PrintBlockBlock extends CanIncludeElementBlock {
     public void exchangeCode() {
         String option = "";
         if (codeOption != null) option = codeOption.option();
-
-        if (includeFields == null) setCode(option + name + "()");
-        else setCode(option + name + "(" + includeFields[0].code() + ")");
+        setCode(option + name + "(" + includeFields[0].code() + ")");
         if (postBlock == null) return;
         addCode(option + "\n" + postBlock.code());
     }
