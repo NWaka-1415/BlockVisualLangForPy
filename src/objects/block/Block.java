@@ -204,8 +204,8 @@ public abstract class Block extends AppletObject {
     }
 
     public void connect() {
-        if (prevBlock == null) return;
-        prevBlock.connectDisplay(this);
+        if (postBlock == null) return;
+        connectDisplay(postBlock);
     }
 
     //つながっているように見せる

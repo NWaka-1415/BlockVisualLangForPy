@@ -1,6 +1,6 @@
 package objects.block;
 
-import objects.block.codeOption.Nest;
+import processing.core.PApplet;
 
 public abstract class CanBeEnclosedBlock extends Block {
     //中に入っているブロック一個目
@@ -29,17 +29,44 @@ public abstract class CanBeEnclosedBlock extends Block {
         internalH = 50;
     }
 
+    public boolean ableToEnclose(Block block) {
+        if (!block.connectable()) return false;
+        int bx = block.x;
+        int by = block.y;
+        return PApplet.abs(x + internalW - bx) <= MARGIN && PApplet.abs(y + internalH - by) <= MARGIN;
+    }
+
     public void encloseBlock(Block block) {
         if (!block.connectable()) return;
         if (this.encloseBlock != null) return;
+        if (block.prevBlock != null) return;
         this.encloseBlock = block;
         block.prevBlock = this;
+        encloseDisplay(block);
     }
 
     private void encloseDisplay(Block block) {
-        int addX = this.x - block.x;
-        int addY = (this.y + this.h) - block.y;
+        int addX = this.x + internalW - block.x;
+        int addY = (this.y + this.internalH) - block.y;
         block.move(addX, addY);
+    }
+
+    public void enclose() {
+        if (encloseBlock == null) return;
+        encloseDisplay(encloseBlock);
+    }
+
+    public void outEnclose() {
+        if (encloseBlock == null) return;
+        encloseBlock.prevBlock = null;
+        encloseBlock = null;
+        resetSize();
+    }
+
+    @Override
+    public void move(int addX, int addY) {
+        super.move(addX, addY);
+        if (encloseBlock != null) encloseBlock.move(addX, addY);
     }
 
     @Override
@@ -59,17 +86,5 @@ public abstract class CanBeEnclosedBlock extends Block {
             w = getDh();
             h = getDw();
         }
-    }
-
-    @Override
-    public void exchangeCode() {
-        String option = "";
-        if (codeOption != null) option = codeOption.option();
-
-        setCode(option + name);
-        addCode(option + "{");
-        addCode(option + "\n" + encloseBlock.code(new Nest(1)));
-        addCode(option + "}");
-        addCode(option + "\n" + postBlock.code(new Nest(1)));
     }
 }

@@ -23,14 +23,17 @@ public class WhileLoopBlock extends CanBeEnclosedBlock {
     @Override
     public void exchangeCode() {
         String option = "";
-        if (codeOption != null) option = codeOption.option();
-
+        int nestNum = 1;
+        if (codeOption != null) {
+            option = codeOption.option();
+            nestNum += codeOption.getOptionNum();
+        }
         if (booleanBlock != null) setCode(option + name + "(" + booleanBlock.code() + ")");
         else setCode(option + name + "()");
 
-        addCode(option + "{");
-        if (encloseBlock != null) addCode(option + "\n" + encloseBlock.code(new Nest(1)));
-        addCode(option + "}");
+        addCode("\n" + option + "{");
+        if (encloseBlock != null) addCode(option + "\n" + encloseBlock.code(new Nest(nestNum)));
+        addCode("\n" + option + "}");
         if (postBlock == null) return;
         addCode(option + "\n" + postBlock.code());
     }

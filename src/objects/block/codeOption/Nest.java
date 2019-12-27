@@ -18,4 +18,9 @@ public class Nest implements ICodeOption {
         }
         return option.toString();
     }
+
+    @Override
+    public int getOptionNum() {
+        return nest;
+    }
 }

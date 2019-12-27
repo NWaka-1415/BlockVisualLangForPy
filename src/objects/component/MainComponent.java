@@ -144,15 +144,26 @@ public class MainComponent extends PApplet {
                 if (selectedBlock != block && block.canConnectElement(selectedBlock)) {
                     block.enterBlock(selectedBlock); //blockがselectedBlockを入れられるなら入れる
                 }
+                if (selectedBlock != block && block instanceof CanBeEnclosedBlock
+                        && ((CanBeEnclosedBlock) block).ableToEnclose(selectedBlock)) {
+                    ((CanBeEnclosedBlock) block).encloseBlock(selectedBlock);
+                }
             }
 
             if (selectedBlock.prevBlock != null) { //選択しているブロックの上でほかのぶとっくとつながっていて
-                if (!selectedBlock.prevBlock.canConnect(selectedBlock)) {  //それがつながる位置にいなければ
+                if(selectedBlock.prevBlock instanceof CanBeEnclosedBlock){
+                    if (!((CanBeEnclosedBlock) selectedBlock.prevBlock).ableToEnclose(selectedBlock)) {
+                        ((CanBeEnclosedBlock) selectedBlock.prevBlock).outEnclose();
+                    } else {
+                        ((CanBeEnclosedBlock) selectedBlock.prevBlock).enclose();
+                    }
+                }
+                else if (!selectedBlock.prevBlock.canConnect(selectedBlock)) {  //それがつながる位置にいなければ
                     selectedBlock.disconnectPreBlock(); //ブロックのつながりを解除
                 }
             }
             //選択しているブロックの親が内包可能ブロックである
-            if (selectedBlock.parentBlock instanceof CanIncludeElementBlock || selectedBlock.parentBlock instanceof ConditionalExpressionBlock) {
+            if (selectedBlock.parentBlock instanceof IHaveIncludeField) {
                 if (!selectedBlock.parentBlock.canConnectElement(selectedBlock)) {
                     selectedBlock.parentBlock.outBlock();
                 } else {
