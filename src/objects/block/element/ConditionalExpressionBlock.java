@@ -4,8 +4,9 @@ import objects.ComboBox;
 import objects.IncludeField;
 import objects.block.Block;
 import objects.block.IHaveContent;
+import objects.block.IHaveIncludeField;
 
-public class ConditionalExpressionBlock extends Block implements IHaveContent {
+public class ConditionalExpressionBlock extends Block implements IHaveContent, IHaveIncludeField {
 
     private final String[] contents = new String[]{" == ", " != ", " < ", " <= ", " > ", " >= "};
     private ComboBox comboBox;
@@ -175,5 +176,10 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent {
     @Override
     public boolean isPressed() {
         return super.isPressed() || comboBox.isPressed();
+    }
+
+    @Override
+    public IncludeField[] getIncludeFields() {
+        return includeFields;
     }
 }

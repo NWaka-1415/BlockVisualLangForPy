@@ -67,11 +67,8 @@ public class MainComponent extends PApplet {
     private void sortDisplay() {
         if (selectedBlock == null) return;
         ArrayList<Block> nIncludeBlocks = new ArrayList<>();
-        if (selectedBlock instanceof CanIncludeElementBlock
-                && ((CanIncludeElementBlock) selectedBlock).includeBlock != null) {
-            nIncludeBlocks.add(((CanIncludeElementBlock) selectedBlock).includeBlock);
-        } else if (selectedBlock instanceof ConditionalExpressionBlock) {
-            for (IncludeField includeField : ((ConditionalExpressionBlock) selectedBlock).includeFields) {
+        if (selectedBlock instanceof IHaveIncludeField) {
+            for (IncludeField includeField : ((IHaveIncludeField) selectedBlock).getIncludeFields()) {
                 if (includeField.includeBlock() != null) nIncludeBlocks.add(includeField.includeBlock());
             }
         }
@@ -177,7 +174,7 @@ public class MainComponent extends PApplet {
         else if (key == 'i') blocks.add(new IntBlock(mouseX, mouseY));
         else if (key == 'b') blocks.add(new BoolBlock(mouseX, mouseY));
         else if (key == 'c') blocks.add(new ConditionalExpressionBlock(mouseX, mouseY));
-        else if(key=='w') blocks.add(new WhileLoopBlock(mouseX,mouseY));
+        else if (key == 'w') blocks.add(new WhileLoopBlock(mouseX, mouseY));
         switch (keyCode) {
             case BACKSPACE:
                 TextField.minusSet();

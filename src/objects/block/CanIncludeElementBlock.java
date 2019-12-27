@@ -1,14 +1,16 @@
 package objects.block;
 
-public abstract class CanIncludeElementBlock extends Block {
+import objects.IncludeField;
+
+public abstract class CanIncludeElementBlock extends Block implements IHaveIncludeField {
 
     protected int boxX, boxY, boxW, boxH, defaultBoxW, defaultBoxH;
 
-    public Block includeBlock;
+    public final IncludeField[] includeFields = new IncludeField[1];
 
     public CanIncludeElementBlock(String name, int x, int y, int w, int h) {
         super(name, x, y, w, h);
-        includeBlock = null;
+        includeFields[0] = new IncludeField(this);
         boxW = w / 4 - 10;
         boxH = h - 14;
         defaultBoxW = boxW;
@@ -24,7 +26,7 @@ public abstract class CanIncludeElementBlock extends Block {
 
     @Override
     public void display() {
-        if (includeBlock != null) boxW = includeBlock.w + 15;
+        if (includeFields[0].includeBlock() != null) boxW = includeFields[0].includeBlock().w + 15;
     }
 
     @Override
@@ -33,14 +35,14 @@ public abstract class CanIncludeElementBlock extends Block {
         //内包ブロックも動かす
         boxX += addX;
         boxY += addY;
-        if (includeBlock != null) includeBlock.move(addX, addY);
+        if (includeFields != null) includeFields[0].move(addX, addY);
     }
 
     @Override
     public void enterBlock(Block block) {
-        if (includeBlock != null) return;//既に自分が中にブロックを保持していたら無視
+        if (includeFields[0].includeBlock() != null) return;//既に自分が中にブロックを保持していたら無視
         if (block.parentBlock != null) return;//既に相手のブロックを保持しているブロックがあれば無視
-        includeBlock = block;
+        includeFields[0].enterBlock(block);
         block.parentBlock = this;
 
         this.w = getDw() + block.w;
@@ -51,8 +53,8 @@ public abstract class CanIncludeElementBlock extends Block {
 
     @Override
     public void enter() {
-        if (includeBlock == null) return;
-        enterDisplay(includeBlock);
+        if (includeFields[0].includeBlock() == null) return;
+        enterDisplay(includeFields[0].includeBlock());
     }
 
     @Override
@@ -64,8 +66,8 @@ public abstract class CanIncludeElementBlock extends Block {
 
     @Override
     public void outBlock() {
-        this.includeBlock.parentBlock = null;
-        this.includeBlock = null;
+        this.includeFields[0].includeBlock().parentBlock = null;
+        this.includeFields[0].outBlock();
         this.w = getDw();
         this.h = getDh();
         resetBox();
@@ -79,5 +81,10 @@ public abstract class CanIncludeElementBlock extends Block {
         int by = block.y;
         return boxX <= bx && bx <= boxX + defaultBoxW
                 && boxY <= by + block.h / 2 && by + block.h / 2 <= boxY + defaultBoxH;
+    }
+
+    @Override
+    public IncludeField[] getIncludeFields() {
+        return includeFields;
     }
 }

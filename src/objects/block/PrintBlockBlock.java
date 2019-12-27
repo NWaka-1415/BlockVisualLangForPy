@@ -33,8 +33,8 @@ public class PrintBlockBlock extends CanIncludeElementBlock {
         String option = "";
         if (codeOption != null) option = codeOption.option();
 
-        if (includeBlock == null) setCode(option + name + "()");
-        else setCode(option + name + "(" + includeBlock.code() + ")");
+        if (includeFields == null) setCode(option + name + "()");
+        else setCode(option + name + "(" + includeFields[0].code() + ")");
         if (postBlock == null) return;
         addCode(option + "\n" + postBlock.code());
     }
