@@ -1,6 +1,7 @@
 package objects.block;
 
 import objects.block.codeOption.Nest;
+import processing.core.PApplet;
 import processing.core.PConstants;
 
 public class WhileLoopBlock extends CanBeEnclosedBlock {
@@ -31,7 +32,7 @@ public class WhileLoopBlock extends CanBeEnclosedBlock {
         if (encloseBlock != null) addCode(option + "\n" + encloseBlock.code(new Nest(1)));
         addCode(option + "}");
         if (postBlock == null) return;
-        addCode(option + "\n" + postBlock.code(new Nest(1)));
+        addCode(option + "\n" + postBlock.code());
     }
 
     @Override
@@ -49,12 +50,15 @@ public class WhileLoopBlock extends CanBeEnclosedBlock {
 
     @Override
     public boolean canConnect(Block block) {
-        return false;
+        if (!block.connectable()) return false;
+        int bx = block.x;
+        int by = block.y;
+        return PApplet.abs(x - bx) <= MARGIN && PApplet.abs(y + h - by) <= MARGIN;
     }
 
     @Override
     public boolean connectable() {
-        return false;
+        return true;
     }
 
     @Override
