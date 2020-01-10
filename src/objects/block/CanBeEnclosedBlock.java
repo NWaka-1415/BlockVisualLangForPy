@@ -93,4 +93,17 @@ public abstract class CanBeEnclosedBlock extends Block {
             h = getDw();
         }
     }
+
+    @Override
+    public boolean isPressed() {
+        boolean top, center, bottom;
+        top = x <= applet.mouseX && applet.mouseX <= x + w &&
+                y <= applet.mouseY && applet.mouseY <= y + internalH;
+        center = x <= applet.mouseX && applet.mouseX <= x + internalW &&
+                y + internalH <= applet.mouseY && applet.mouseY <= y + h - internalH;
+        bottom = x <= applet.mouseX && applet.mouseX <= x + w &&
+                y + h - internalH <= applet.mouseY && applet.mouseY <= y + h;
+
+        return top || center || bottom;
+    }
 }
