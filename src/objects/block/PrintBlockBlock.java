@@ -6,20 +6,22 @@ import processing.core.PConstants;
 public class PrintBlockBlock extends CanIncludeElementBlock {
     public PrintBlockBlock(int x, int y) {
         super("print", x, y, 150, 50);
+        includeFields[0].setColor(241, 196, 15);
     }
 
     @Override
     public void display() {
-        super.display();
         applet.strokeWeight(3);
         applet.stroke(241, 196, 15);
         applet.fill(243, 156, 18);   //塗りつぶしの色を黄色に
         Block.createConnectBlock(x, y, w, h);
         applet.strokeWeight(1);
 //        applet.stroke(100, 100, 100);
-        applet.stroke(241, 196, 15);
-        applet.fill(255);
-        applet.rect(boxX, boxY, boxW, boxH, 5);    //最後の引数は矩形の角の曲がり具合
+
+        includeFields[0].display();
+//        applet.stroke(241, 196, 15);
+//        applet.fill(255);
+//        applet.rect(boxX, boxY, boxW, boxH, 5);    //最後の引数は矩形の角の曲がり具合
         //applet.rect(x, y, w, h, 15);
         //Text
         applet.fill(255);
@@ -48,6 +50,11 @@ public class PrintBlockBlock extends CanIncludeElementBlock {
     @Override
     public boolean connectable() {
         return true;
+    }
+
+    @Override
+    protected void enterDisplay(Block block) {
+        //pass
     }
 
     @Override
