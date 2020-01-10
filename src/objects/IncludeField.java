@@ -5,6 +5,7 @@ import objects.block.Block;
 public class IncludeField extends AppletObject {
     private int x, y;
     private int w, h, dW, dH;
+    private int r, g, b;
 
     private Block includeBlock;
     private Block parentBlock;
@@ -78,7 +79,15 @@ public class IncludeField extends AppletObject {
         return includeBlock;
     }
 
+    public IncludeField setColor(int r, int g, int b) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        return this;
+    }
+
     public void enterBlock(Block block) {
+        block.parentBlock = this.parentBlock;
         includeBlock = block;
         this.w = block.w;
 
@@ -95,12 +104,12 @@ public class IncludeField extends AppletObject {
     public void display() {
         if (includeBlock == null) {
             applet.strokeWeight(3);
-            applet.stroke(90, 0, 180);
+            applet.stroke(r, g, b);
             applet.fill(255);
             applet.rect(x, y, dW, dH, 5);
         } else {
             applet.strokeWeight(3);
-            applet.stroke(90, 0, 180);
+            applet.stroke(r, g, b);
             applet.fill(255);
             applet.rect(x, y, w, h, 5);
         }
