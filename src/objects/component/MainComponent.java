@@ -61,7 +61,7 @@ public class MainComponent extends PApplet {
             block.display();
         }
         ComboBox.selectDisplay();
-        CanBeEnclosedBlock.calculationAll();
+//        CanBeEnclosedBlock.calculationAll();
         sortDisplay();
     }
 
@@ -172,6 +172,7 @@ public class MainComponent extends PApplet {
                 }
             }
             selectedBlock.connect();
+            CanBeEnclosedBlock.calculationAll();
 
             selectedBlock = null;   //ドラッグ終了のため選択されたブロックは必ずnullに
         }

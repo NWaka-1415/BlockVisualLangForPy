@@ -17,6 +17,7 @@ public abstract class CanBeEnclosedBlock extends Block {
     public static void calculationAll() {
         for (CanBeEnclosedBlock cbeBlock : canBeEnclosedBlocks) {
             cbeBlock.calcSizeFromEnclose();
+            cbeBlock.connect();
         }
     }
 
@@ -91,7 +92,7 @@ public abstract class CanBeEnclosedBlock extends Block {
     public void enclose() {
         if (encloseBlock == null) return;
         encloseDisplay(encloseBlock);
-        if (postBlock != null) connect();
+        connect();
     }
 
     public void outEnclose() {
@@ -101,7 +102,7 @@ public abstract class CanBeEnclosedBlock extends Block {
         encloseBlock = null;
         resetSize();
         calcSizeFromEnclose();
-        if (postBlock != null) connect();
+        connect();
     }
 
     @Override
