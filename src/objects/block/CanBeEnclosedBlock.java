@@ -42,7 +42,7 @@ public abstract class CanBeEnclosedBlock extends Block {
     }
 
     public CanBeEnclosedBlock(String name, int x, int y) {
-        super(name, x, y, 120, 170);
+        super(name, x, y, 170, 170);
         internalW = 50;
         internalH = 50;
         canBeEnclosedBlocks.add(this);
@@ -84,8 +84,7 @@ public abstract class CanBeEnclosedBlock extends Block {
             }
             h = getDh() + addH;
         } else {
-            w = getDh();
-            h = getDw();
+            resetSize();
         }
     }
 

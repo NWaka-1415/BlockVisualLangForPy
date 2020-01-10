@@ -12,6 +12,8 @@ public class WhileLoopBlock extends CanBeEnclosedBlock implements IHaveIncludeFi
     public WhileLoopBlock(int x, int y) {
         super("while", x, y);
         includeField[0] = new IncludeField(this);
+        includeField[0].setColor(0, 224, 194).setSize(30, 40).setDefaultSize(30, 40);
+        includeField[0].setPos(x + getDw() - includeField[0].getDW() - 10, y + internalH / 10);
     }
 
     @Override
@@ -42,6 +44,13 @@ public class WhileLoopBlock extends CanBeEnclosedBlock implements IHaveIncludeFi
         applet.textAlign(PConstants.CENTER, PConstants.CENTER);
         applet.textSize(24);
         applet.text(name, x + 75, y + internalH / 2 - internalH / 10);
+        includeField[0].display();
+    }
+
+    @Override
+    public void move(int addX, int addY) {
+        super.move(addX, addY);
+        includeField[0].move(addX, addY);
     }
 
     @Override
