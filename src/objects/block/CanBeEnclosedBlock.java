@@ -63,7 +63,6 @@ public abstract class CanBeEnclosedBlock extends Block {
 
     public void outEnclose() {
         if (encloseBlock == null) return;
-        debugLog("out");
         encloseBlock.prevBlock = null;
         encloseBlock = null;
         resetSize();
