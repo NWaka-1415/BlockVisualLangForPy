@@ -51,34 +51,13 @@ public abstract class CanBeEnclosedBlock extends Block {
     }
 
     private void encloseDisplay(Block block) {
+        calcSizeFromEnclose();
         int addX = this.x + internalW - block.x;
         int addY = (this.y + this.internalH) - block.y;
         block.move(addX, addY);
     }
 
-    public void enclose() {
-        if (encloseBlock == null) return;
-        encloseDisplay(encloseBlock);
-        if (postBlock != null) connect();
-    }
-
-    public void outEnclose() {
-        if (encloseBlock == null) return;
-        encloseBlock.resetCodeOption();
-        encloseBlock.prevBlock = null;
-        encloseBlock = null;
-        resetSize();
-        if (postBlock != null) connect();
-    }
-
-    @Override
-    public void move(int addX, int addY) {
-        super.move(addX, addY);
-        if (encloseBlock != null) encloseBlock.move(addX, addY);
-    }
-
-    @Override
-    public void display() {
+    private void calcSizeFromEnclose(){
         if (encloseBlock != null) {
             int addH = 0;
             int addW_max;
@@ -94,6 +73,33 @@ public abstract class CanBeEnclosedBlock extends Block {
             w = getDh();
             h = getDw();
         }
+    }
+
+    public void enclose() {
+        if (encloseBlock == null) return;
+        encloseDisplay(encloseBlock);
+        if (postBlock != null) connect();
+    }
+
+    public void outEnclose() {
+        if (encloseBlock == null) return;
+        encloseBlock.resetCodeOption();
+        encloseBlock.prevBlock = null;
+        encloseBlock = null;
+        resetSize();
+        calcSizeFromEnclose();
+        if (postBlock != null) connect();
+    }
+
+    @Override
+    public void move(int addX, int addY) {
+        super.move(addX, addY);
+        if (encloseBlock != null) encloseBlock.move(addX, addY);
+    }
+
+    @Override
+    public void display() {
+        calcSizeFromEnclose();
     }
 
     @Override
