@@ -61,6 +61,7 @@ public class MainComponent extends PApplet {
             block.display();
         }
         ComboBox.selectDisplay();
+        CanBeEnclosedBlock.calculationAll();
         sortDisplay();
     }
 

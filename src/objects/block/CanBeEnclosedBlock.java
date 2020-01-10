@@ -2,12 +2,23 @@ package objects.block;
 
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+
 public abstract class CanBeEnclosedBlock extends Block {
     //中に入っているブロック一個目
     protected Block encloseBlock;
 
     public Block getEncloseBlock() {
         return encloseBlock;
+    }
+
+    private static ArrayList<CanBeEnclosedBlock> canBeEnclosedBlocks = new ArrayList<>();
+
+    public static void calculationAll() {
+        for (CanBeEnclosedBlock cbeBlock : canBeEnclosedBlocks) {
+            cbeBlock.calcSizeFromEnclose();
+            cbeBlock.connect();
+        }
     }
 
     protected int internalW, internalH;
@@ -20,18 +31,21 @@ public abstract class CanBeEnclosedBlock extends Block {
         super(name, x, y, w, h);
         this.internalW = internalW;
         this.internalH = internalH;
+        canBeEnclosedBlocks.add(this);
     }
 
     public CanBeEnclosedBlock(String name, int x, int y, int w) {
         super(name, x, y, w, 170);
         internalW = 50;
         internalH = 50;
+        canBeEnclosedBlocks.add(this);
     }
 
     public CanBeEnclosedBlock(String name, int x, int y) {
         super(name, x, y, 120, 170);
         internalW = 50;
         internalH = 50;
+        canBeEnclosedBlocks.add(this);
     }
 
     public boolean ableToEnclose(Block block) {
@@ -57,7 +71,7 @@ public abstract class CanBeEnclosedBlock extends Block {
         block.move(addX, addY);
     }
 
-    private void calcSizeFromEnclose(){
+    private void calcSizeFromEnclose() {
         if (encloseBlock != null) {
             int addH = 0;
             int addW_max;
