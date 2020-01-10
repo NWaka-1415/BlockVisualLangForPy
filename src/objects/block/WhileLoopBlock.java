@@ -1,20 +1,13 @@
 package objects.block;
 
+import objects.IncludeField;
 import objects.block.codeOption.Nest;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
 public class WhileLoopBlock extends CanBeEnclosedBlock {
 
-    private Block booleanBlock;
-
-    public WhileLoopBlock(int x, int y, int w, int h, int internalW, int internalH) {
-        super("while", x, y, w, h, internalW, internalH);
-    }
-
-    public WhileLoopBlock(int x, int y, int w) {
-        super("while", x, y, w);
-    }
+    private IncludeField includeField = new IncludeField(this);
 
     public WhileLoopBlock(int x, int y) {
         super("while", x, y);
@@ -28,8 +21,7 @@ public class WhileLoopBlock extends CanBeEnclosedBlock {
             option = codeOption.option();
             nestNum += codeOption.getOptionNum();
         }
-        if (booleanBlock != null) setCode(option + name + "(" + booleanBlock.code() + ")");
-        else setCode(option + name + "()");
+        setCode(option + name + "(" + includeField.code() + ")");
 
         addCode("\n" + option + "{");
         if (encloseBlock != null) addCode(option + "\n" + encloseBlock.code(new Nest(nestNum)));
