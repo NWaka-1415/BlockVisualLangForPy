@@ -5,12 +5,13 @@ import objects.block.codeOption.Nest;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
-public class WhileLoopBlock extends CanBeEnclosedBlock {
+public class WhileLoopBlock extends CanBeEnclosedBlock implements IHaveIncludeField {
 
-    private IncludeField includeField = new IncludeField(this);
+    private IncludeField[] includeField = new IncludeField[1];
 
     public WhileLoopBlock(int x, int y) {
         super("while", x, y);
+        includeField[0] = new IncludeField(this);
     }
 
     @Override
@@ -21,7 +22,7 @@ public class WhileLoopBlock extends CanBeEnclosedBlock {
             option = codeOption.option();
             nestNum += codeOption.getOptionNum();
         }
-        setCode(option + name + "(" + includeField.code() + ")");
+        setCode(option + name + "(" + includeField[0].code() + ")");
 
         addCode("\n" + option + "{");
         if (encloseBlock != null) addCode(option + "\n" + encloseBlock.code(new Nest(nestNum)));
@@ -84,5 +85,10 @@ public class WhileLoopBlock extends CanBeEnclosedBlock {
     @Override
     public boolean connectableElement() {
         return false;
+    }
+
+    @Override
+    public IncludeField[] getIncludeFields() {
+        return includeField;
     }
 }
