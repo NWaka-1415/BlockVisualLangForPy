@@ -35,7 +35,7 @@ public abstract class CanIncludeElementBlock extends Block implements IHaveInclu
         //内包ブロックも動かす
         boxX += addX;
         boxY += addY;
-        if (includeFields != null) includeFields[0].move(addX, addY);
+        if (includeFields[0] != null) includeFields[0].move(addX, addY);
     }
 
     @Override
