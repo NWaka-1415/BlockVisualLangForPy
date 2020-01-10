@@ -68,27 +68,41 @@ public class WhileLoopBlock extends CanBeEnclosedBlock implements IHaveIncludeFi
 
     @Override
     public void enterBlock(Block block) {
+        if (includeField[0].includeBlock() != null) return;
+        if (block.parentBlock != null) return;
+        includeField[0].enterBlock(block);
 
+        this.w = getDw() + includeField[0].getW();
+
+        enterDisplay(block);
     }
 
     @Override
     public void enter() {
-
+        if (includeField[0].includeBlock() == null) return;
+        enterDisplay(includeField[0].includeBlock());
     }
 
     @Override
     protected void enterDisplay(Block block) {
-
+        //pass
     }
 
     @Override
     public void outBlock() {
+        includeField[0].outBlock();
+        resetSize();
+    }
 
+    @Override
+    public void outEnclose() {
+        super.outEnclose();
     }
 
     @Override
     public boolean canConnectElement(Block block) {
-        return false;
+        if (!block.connectableElement()) return false;
+        return includeField[0].canIncludeBlock(block);
     }
 
     @Override

@@ -14,10 +14,6 @@ public abstract class CanIncludeElementBlock extends Block implements IHaveInclu
         includeFields[0].setPos(x + w - 5 - includeFields[0].getW(), y + 7);
     }
 
-    protected void resetBox() {
-        includeFields[0].resetSize();
-    }
-
     @Override
     public void move(int addX, int addY) {
         super.move(addX, addY);
@@ -44,11 +40,9 @@ public abstract class CanIncludeElementBlock extends Block implements IHaveInclu
 
     @Override
     public void outBlock() {
-        this.includeFields[0].includeBlock().parentBlock = null;
         this.includeFields[0].outBlock();
         this.w = getDw();
         this.h = getDh();
-        resetBox();
     }
 
     //中にエレメントを入れられるか

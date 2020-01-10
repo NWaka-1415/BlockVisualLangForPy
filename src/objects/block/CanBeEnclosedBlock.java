@@ -84,7 +84,7 @@ public abstract class CanBeEnclosedBlock extends Block {
             }
             h = getDh() + addH;
         } else {
-            resetSize();
+            h = getDh();
         }
     }
 
@@ -99,7 +99,7 @@ public abstract class CanBeEnclosedBlock extends Block {
         encloseBlock.resetCodeOption();
         encloseBlock.prevBlock = null;
         encloseBlock = null;
-        resetSize();
+        h = getDh();
         calcSizeFromEnclose();
         connect();
     }

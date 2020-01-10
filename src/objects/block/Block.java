@@ -144,10 +144,10 @@ public abstract class Block extends AppletObject {
     }
 
     //描画部をここに記述
-    abstract public void display();
+    public abstract void display();
 
     //コードに変換
-    abstract public void exchangeCode();
+    public abstract void exchangeCode();
 
     //相手のブロックとつながれるか
     public abstract boolean canConnect(Block block);

@@ -90,6 +90,7 @@ public class IncludeField extends AppletObject {
         block.parentBlock = this.parentBlock;
         includeBlock = block;
         this.w = block.w;
+        this.h = block.h;
 
         enterDisplay(block);
     }
@@ -128,9 +129,9 @@ public class IncludeField extends AppletObject {
     }
 
     public void outBlock() {
-        debugLog("includeFlag:%b", includeFlag);
+//        debugLog("includeFlag:%b", includeFlag);
         if (includeFlag) return;
-        debugLog("None return");
+//        debugLog("None return");
         includeBlock.parentBlock = null;
         includeBlock = null;
         resetSize();
