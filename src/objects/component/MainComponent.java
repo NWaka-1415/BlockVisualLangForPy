@@ -152,8 +152,8 @@ public class MainComponent extends PApplet {
             }
 
             if (selectedBlock.prevBlock != null) { //選択しているブロックの上でほかのぶとっくとつながっていて
-                if (selectedBlock.prevBlock instanceof CanBeEnclosedBlock
-                        && ((CanBeEnclosedBlock) selectedBlock.prevBlock).getEncloseBlock() == selectedBlock) {
+                if (selectedBlock.prevBlock instanceof CanBeEnclosedBlock &&
+                        ((CanBeEnclosedBlock) selectedBlock.prevBlock).getEncloseBlock() == selectedBlock) {
                     if (!((CanBeEnclosedBlock) selectedBlock.prevBlock).ableToEnclose(selectedBlock)) {
                         ((CanBeEnclosedBlock) selectedBlock.prevBlock).outEnclose();
                     } else {
