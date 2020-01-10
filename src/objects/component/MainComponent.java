@@ -151,14 +151,14 @@ public class MainComponent extends PApplet {
             }
 
             if (selectedBlock.prevBlock != null) { //選択しているブロックの上でほかのぶとっくとつながっていて
-                if(selectedBlock.prevBlock instanceof CanBeEnclosedBlock){
+                if (selectedBlock.prevBlock instanceof CanBeEnclosedBlock
+                        && ((CanBeEnclosedBlock) selectedBlock.prevBlock).getEncloseBlock() == selectedBlock) {
                     if (!((CanBeEnclosedBlock) selectedBlock.prevBlock).ableToEnclose(selectedBlock)) {
                         ((CanBeEnclosedBlock) selectedBlock.prevBlock).outEnclose();
                     } else {
                         ((CanBeEnclosedBlock) selectedBlock.prevBlock).enclose();
                     }
-                }
-                else if (!selectedBlock.prevBlock.canConnect(selectedBlock)) {  //それがつながる位置にいなければ
+                } else if (!selectedBlock.prevBlock.canConnect(selectedBlock)) {  //それがつながる位置にいなければ
                     selectedBlock.disconnectPreBlock(); //ブロックのつながりを解除
                 }
             }

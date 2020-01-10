@@ -5,6 +5,11 @@ import processing.core.PApplet;
 public abstract class CanBeEnclosedBlock extends Block {
     //中に入っているブロック一個目
     protected Block encloseBlock;
+
+    public Block getEncloseBlock() {
+        return encloseBlock;
+    }
+
     protected int internalW, internalH;
 
     public int getInternalH() {
@@ -58,6 +63,7 @@ public abstract class CanBeEnclosedBlock extends Block {
 
     public void outEnclose() {
         if (encloseBlock == null) return;
+        debugLog("out");
         encloseBlock.prevBlock = null;
         encloseBlock = null;
         resetSize();
