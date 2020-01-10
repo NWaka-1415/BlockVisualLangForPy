@@ -138,6 +138,11 @@ public abstract class Block extends AppletObject {
         applet.endShape();
     }
 
+    // コードオプションのリセット
+    protected void resetCodeOption() {
+        codeOption = null;
+    }
+
     //描画部をここに記述
     abstract public void display();
 
@@ -219,6 +224,7 @@ public abstract class Block extends AppletObject {
 
     //上にあるブロックと自分のブロックのつながりを解除
     public void disconnectPreBlock() {
+        resetCodeOption();
         this.prevBlock.postBlock = null;
         this.prevBlock = null;
     }

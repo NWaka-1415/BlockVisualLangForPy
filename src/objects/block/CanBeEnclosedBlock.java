@@ -59,13 +59,16 @@ public abstract class CanBeEnclosedBlock extends Block {
     public void enclose() {
         if (encloseBlock == null) return;
         encloseDisplay(encloseBlock);
+        if (postBlock != null) connect();
     }
 
     public void outEnclose() {
         if (encloseBlock == null) return;
+        encloseBlock.resetCodeOption();
         encloseBlock.prevBlock = null;
         encloseBlock = null;
         resetSize();
+        if (postBlock != null) connect();
     }
 
     @Override
