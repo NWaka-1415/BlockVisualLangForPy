@@ -30,7 +30,8 @@ public class WhileLoopBlock extends CanBeEnclosedBlock implements IHaveIncludeFi
         if (encloseBlock != null) addCode(option + "\n" + encloseBlock.code(new Nest(nestNum)));
         addCode("\n" + option + "}");
         if (postBlock == null) return;
-        addCode(option + "\n" + postBlock.code());
+        int postCodeOption = codeOption == null ? 0 : codeOption.getOptionNum();
+        addCode(option + "\n" + postBlock.code(new Nest(postCodeOption)));
     }
 
     @Override
