@@ -39,7 +39,8 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent, I
         h += 10;
         for (IncludeField includeField : includeFields) {
             includeField.setSize(tmpW / 2, tmpH).setDefaultSize(tmpW / 4, tmpH)
-                    .setPos(count == 0 ? x + 5 : x + w - 5 - includeField.getW() / 2, y + h / 10);
+                    .setPos(count == 0 ? x + 5 : x + w - 5 - includeField.getW() / 2, y + h / 10)
+                    .setColor(90, 0, 180);
             count++;
         }
         setDefaultSize(w, h);
@@ -124,7 +125,6 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent, I
                     && block.parentBlock == null
                     && includeField.includeFlag()) {
                 includeField.enterBlock(block);
-                block.parentBlock = this;
             }
         }
         if (includeFields[0].includeBlock() != null && includeFields[1].includeBlock() != null) {
