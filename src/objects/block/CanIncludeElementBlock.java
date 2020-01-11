@@ -1,14 +1,19 @@
 package objects.block;
 
 import objects.IncludeField;
+import objects.block.enums.ReturnType;
 
 public abstract class CanIncludeElementBlock extends Block implements IHaveIncludeField {
 
     public final IncludeField[] includeFields = new IncludeField[1];
 
-    public CanIncludeElementBlock(String name, int x, int y, int w, int h) {
+    public CanIncludeElementBlock(String name, int x, int y, int w, int h, ReturnType[] returnTypes) {
         super(name, x, y, w, h);
-        includeFields[0] = new IncludeField(this);
+        setIncludeFields(returnTypes);
+    }
+
+    protected void setIncludeFields(ReturnType[] returnTypes) {
+        includeFields[0] = new IncludeField(this, returnTypes);
         includeFields[0].setSize(w / 4 - 10, h - 14).setDefaultSize(w / 4 - 10, h - 14);
         debugLog(includeFields[0].getW());
         includeFields[0].setPos(x + w - 5 - includeFields[0].getW(), y + 7);
@@ -25,7 +30,7 @@ public abstract class CanIncludeElementBlock extends Block implements IHaveInclu
     public void enterBlock(Block block) {
         if (includeFields[0].includeBlock() != null) return;//既に自分が中にブロックを保持していたら無視
         if (block.parentBlock != null) return;//既に相手のブロックを保持しているブロックがあれば無視
-        includeFields[0].enterBlock(block);
+        if (!includeFields[0].enterBlock(block)) return;
 
         this.w = getDw() + block.w;
 

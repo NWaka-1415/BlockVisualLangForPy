@@ -8,6 +8,7 @@ import objects.block.element.ConditionalExpressionBlock;
 import objects.block.element.IntBlock;
 import objects.AppletObject;
 import objects.TextField;
+import objects.block.enums.ReturnType;
 import processing.core.PApplet;
 import processing.core.PSurface;
 
@@ -46,7 +47,9 @@ public class MainComponent extends PApplet {
         TextField.initialize();
         code = "";
         blocks = new ArrayList<>();
-        blocks.add(new PrintBlockBlock(250, 250));
+        blocks.add(new PrintBlockBlock(250, 250,
+                new ReturnType[]{ReturnType.Bool, ReturnType.Int, ReturnType.String,
+                        ReturnType.Float, ReturnType.Double, ReturnType.Char}));
     }
 
     @Override
@@ -183,7 +186,9 @@ public class MainComponent extends PApplet {
         System.out.println(key);
         TextField.set(key);
         changeCode();
-        if (key == 'p') blocks.add(new PrintBlockBlock(mouseX, mouseY));
+        if (key == 'p') blocks.add(new PrintBlockBlock(mouseX, mouseY,
+                new ReturnType[]{ReturnType.Bool, ReturnType.Int, ReturnType.String,
+                        ReturnType.Float, ReturnType.Double, ReturnType.Char}));
         else if (key == 'i') blocks.add(new IntBlock(mouseX, mouseY));
         else if (key == 'b') blocks.add(new BoolBlock(mouseX, mouseY));
         else if (key == 'c') blocks.add(new ConditionalExpressionBlock(mouseX, mouseY));

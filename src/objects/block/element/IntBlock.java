@@ -2,6 +2,7 @@ package objects.block.element;
 
 import objects.block.Block;
 import objects.block.InputtableBlock;
+import objects.block.enums.ReturnType;
 import objects.block.enums.TextType;
 
 
@@ -9,6 +10,7 @@ public class IntBlock extends InputtableBlock {
 
     public IntBlock(int x, int y) {
         super("int", x, y, 75, "0");
+        setReturnType(ReturnType.Int);
         textField.setTextType(TextType.Integer);
     }
 

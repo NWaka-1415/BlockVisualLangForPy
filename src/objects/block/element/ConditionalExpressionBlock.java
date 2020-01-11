@@ -5,6 +5,7 @@ import objects.IncludeField;
 import objects.block.Block;
 import objects.block.IHaveContent;
 import objects.block.IHaveIncludeField;
+import objects.block.enums.ReturnType;
 
 public class ConditionalExpressionBlock extends Block implements IHaveContent, IHaveIncludeField {
 
@@ -30,9 +31,13 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent, I
 
     private void initialize() {
         comboBox = new ComboBox(contents, x, y + h / 10);
+        setReturnType(ReturnType.Bool);
 
-        includeFields[0] = new IncludeField(this);
-        includeFields[1] = new IncludeField(this);
+        ReturnType[] accept = new ReturnType[]{
+                ReturnType.Int, ReturnType.Float, ReturnType.Double
+        };
+        includeFields[0] = new IncludeField(this, accept);
+        includeFields[1] = new IncludeField(this, accept);
         int count = 0;
         int tmpW = w, tmpH = h;
         w += comboBox.getW();
@@ -124,7 +129,7 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent, I
             if (includeField.includeBlock() == null
                     && block.parentBlock == null
                     && includeField.includeFlag()) {
-                includeField.enterBlock(block);
+                if (!includeField.enterBlock(block)) return;
             }
         }
         if (includeFields[0].includeBlock() != null && includeFields[1].includeBlock() != null) {
