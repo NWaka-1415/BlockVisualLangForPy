@@ -29,6 +29,7 @@ public class ForLoopBlock extends CanBeEnclosedBlock implements IHaveContent {
             option = codeOption.option();
             nestNum += codeOption.getOptionNum();
         }
+
         int plus = Integer.parseInt(textFields[2].getText());
         String var = "i";
         setCode(option + name + "(int " + var + " = " + textFields[0].getText()
@@ -37,7 +38,7 @@ public class ForLoopBlock extends CanBeEnclosedBlock implements IHaveContent {
         );
         addCode(")");
         addCode("\n" + option + "{");
-        if (encloseBlock != null) addCode("\n" + option + encloseBlock.code(new Nest(nestNum)));
+        if (encloseBlock != null) addCode("\n" + encloseBlock.code(new Nest(nestNum)));
         addCode("\n" + option + "}");
         if (postBlock == null) return;
         int postCodeOption = codeOption == null ? 0 : codeOption.getOptionNum();
@@ -127,7 +128,9 @@ public class ForLoopBlock extends CanBeEnclosedBlock implements IHaveContent {
 
     @Override
     public void setFocusToContent() {
-
+        for (TextField textField : textFields) {
+            if (textField.isPressed()) textField.focus();
+        }
     }
 
     @Override

@@ -93,6 +93,7 @@ public class MainComponent extends PApplet {
 
     //マウスが押されたときに呼ばれる関数
     public void mousePressed() {
+        if (mouseButton != LEFT) return;
         boolean select = false;
         for (int i = blocks.size() - 1; i >= 0; i--) {
             Block block = blocks.get(i);
@@ -133,6 +134,7 @@ public class MainComponent extends PApplet {
 
     //マウスをドラッグしている間呼ばれる関数
     public void mouseDragged() {
+        if (mouseButton != LEFT) return;
         if (selectedBlock != null) {
             selectedBlock.move(mouseX - pmouseX, mouseY - pmouseY); //移動量はカーソルが前フレームから移動した量
         }
@@ -140,6 +142,7 @@ public class MainComponent extends PApplet {
 
     //マウスが離されたとき呼ばれる関数
     public void mouseReleased() {
+        if (mouseButton != LEFT) return;
         if (selectedBlock != null) {
             for (Block block : blocks) {
                 if (selectedBlock != block && block.canConnect(selectedBlock)) {

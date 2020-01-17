@@ -1,7 +1,6 @@
 package objects;
 
 import objects.block.Block;
-import objects.block.InputtableBlock;
 import objects.block.enums.TextType;
 import processing.core.PConstants;
 
@@ -182,6 +181,7 @@ public class TextField extends AppletObject {
         for (String string : stringArray) {
             text += string;
         }
+        if (textType == TextType.Integer && text.equals("")) text = "0";
         setText(text);
         AppletObject.debugLog(String.format(" textP sets : %d", textPosition));
         minusTextPosition();
