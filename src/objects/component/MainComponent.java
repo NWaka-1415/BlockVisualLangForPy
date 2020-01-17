@@ -193,6 +193,7 @@ public class MainComponent extends PApplet {
         else if (key == 'b') blocks.add(new BoolBlock(mouseX, mouseY));
         else if (key == 'c') blocks.add(new ConditionalExpressionBlock(mouseX, mouseY));
         else if (key == 'w') blocks.add(new WhileLoopBlock(mouseX, mouseY));
+        else if (key == 'f') blocks.add(new ForLoopBlock(mouseX, mouseY));
         switch (keyCode) {
             case BACKSPACE:
                 TextField.minusSet();

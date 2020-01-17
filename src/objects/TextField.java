@@ -1,5 +1,6 @@
 package objects;
 
+import objects.block.Block;
 import objects.block.InputtableBlock;
 import objects.block.enums.TextType;
 import processing.core.PConstants;
@@ -11,7 +12,7 @@ public class TextField extends AppletObject {
     private static ArrayList<TextField> textFields;
 
     private String text;
-    private InputtableBlock parentBlock;
+    private Block parentBlock;
     private TextType textType;
     private boolean isFocus;
     private int textPosition;
@@ -45,8 +46,8 @@ public class TextField extends AppletObject {
         textFields = new ArrayList<>();
     }
 
-    public TextField(String text, InputtableBlock inputtableBlock) {
-        this.parentBlock = inputtableBlock;
+    public TextField(String text, Block block) {
+        this.parentBlock = block;
         this.text = text;
         textPosition = text.length() - 1;
         this.x = 0;
@@ -59,8 +60,8 @@ public class TextField extends AppletObject {
         focus();
     }
 
-    public TextField(String text, int x, int y, int w, int h, InputtableBlock inputtableBlock) {
-        this.parentBlock = inputtableBlock;
+    public TextField(String text, int x, int y, int w, int h, Block block) {
+        this.parentBlock = block;
         this.text = text;
         textPosition = text.length() - 1;
         this.x = x;
