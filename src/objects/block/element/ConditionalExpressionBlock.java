@@ -184,7 +184,7 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent, I
     }
 
     @Override
-    public IncludeField[] getIncludeFields() {
+    public IncludeField[] getIncludeField() {
         return includeFields;
     }
 }

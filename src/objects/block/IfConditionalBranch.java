@@ -6,16 +6,15 @@ import objects.block.enums.ReturnType;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
-public class WhileLoopBlock extends CanBeEnclosedBlock implements IHaveIncludeField {
+public class IfConditionalBranch extends CanBeEnclosedBlock implements IHaveIncludeField {
 
     private IncludeField[] includeField = new IncludeField[1];
 
-    public WhileLoopBlock(int x, int y) {
-        super("while", x, y);
-        ReturnType[] accept = new ReturnType[1];
-        accept[0] = ReturnType.Bool;
+    public IfConditionalBranch(int x, int y) {
+        super("if", x, y);
+        ReturnType[] accept = {ReturnType.Bool};
         includeField[0] = new IncludeField(this, accept);
-        includeField[0].setColor(0, 224, 194).setSize(30, 40).setDefaultSize(30, 40);
+        includeField[0].setColor(255, 161, 38).setSize(30, 40).setDefaultSize(30, 40);
         includeField[0].setPos(x + getDw() - includeField[0].getDW() - 10, y + internalH / 10);
     }
 
@@ -27,7 +26,7 @@ public class WhileLoopBlock extends CanBeEnclosedBlock implements IHaveIncludeFi
             option = codeOption.option();
             nestNum += codeOption.getOptionNum();
         }
-        setCode(option + name + "(" + includeField[0].code() + ")");
+        setCode(option + name + " (" + includeField[0].code() + ")");
 
         addCode("\n" + option + "{");
         if (encloseBlock != null) addCode("\n" + encloseBlock.code(new Nest(nestNum)));
@@ -41,8 +40,8 @@ public class WhileLoopBlock extends CanBeEnclosedBlock implements IHaveIncludeFi
     public void display() {
         super.display();
         applet.strokeWeight(3);
-        applet.stroke(0, 224, 194);
-        applet.fill(0, 188, 166);
+        applet.stroke(255, 161, 38);
+        applet.fill(255, 102, 0);
         Block.createEncloseBlock(x, y, w, h, internalW, internalH);
         applet.fill(255);
         applet.textAlign(PConstants.CENTER, PConstants.CENTER);
@@ -96,11 +95,6 @@ public class WhileLoopBlock extends CanBeEnclosedBlock implements IHaveIncludeFi
     public void outBlock() {
         includeField[0].outBlock();
         resetSize();
-    }
-
-    @Override
-    public void outEnclose() {
-        super.outEnclose();
     }
 
     @Override

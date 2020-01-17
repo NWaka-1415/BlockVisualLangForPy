@@ -58,7 +58,7 @@ public abstract class CanIncludeElementBlock extends Block implements IHaveInclu
     }
 
     @Override
-    public IncludeField[] getIncludeFields() {
+    public IncludeField[] getIncludeField() {
         return includeFields;
     }
 }
