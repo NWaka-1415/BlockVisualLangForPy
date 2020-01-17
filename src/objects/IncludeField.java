@@ -1,6 +1,7 @@
 package objects;
 
 import objects.block.Block;
+import objects.block.enums.ReturnType;
 
 public class IncludeField extends AppletObject {
     private int x, y;
@@ -9,6 +10,8 @@ public class IncludeField extends AppletObject {
 
     private Block includeBlock;
     private Block parentBlock;
+
+    private ReturnType[] acceptReturnTypes;
 
     //ブロックが入れます
     private boolean includeFlag;
@@ -41,14 +44,16 @@ public class IncludeField extends AppletObject {
         return includeFlag;
     }
 
-    public IncludeField(Block parentBlock) {
+    public IncludeField(Block parentBlock, ReturnType[] acceptReturnTypes) {
         this.parentBlock = parentBlock;
+        this.acceptReturnTypes = acceptReturnTypes;
         includeBlock = null;
     }
 
-    public IncludeField(Block parentBlock, Block block) {
+    public IncludeField(Block parentBlock, Block block, ReturnType[] acceptReturnTypes) {
         this.parentBlock = parentBlock;
         includeBlock = block;
+        this.acceptReturnTypes = acceptReturnTypes;
     }
 
     public IncludeField setPos(int x, int y) {
@@ -86,13 +91,22 @@ public class IncludeField extends AppletObject {
         return this;
     }
 
-    public void enterBlock(Block block) {
+    private boolean checkReturnType(ReturnType returnType) {
+        for (ReturnType acceptReturnType : acceptReturnTypes) {
+            if (acceptReturnType == returnType) return true;
+        }
+        return false;
+    }
+
+    public boolean enterBlock(Block block) {
+        if (!checkReturnType(block.getReturnType())) return false;
         block.parentBlock = this.parentBlock;
         includeBlock = block;
         this.w = block.w;
         this.h = block.h;
 
         enterDisplay(block);
+        return true;
     }
 
     public void enterDisplay(Block block) {

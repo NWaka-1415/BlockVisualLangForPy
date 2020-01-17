@@ -2,6 +2,7 @@ package objects.block;
 
 import objects.IncludeField;
 import objects.block.codeOption.Nest;
+import objects.block.enums.ReturnType;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
@@ -11,7 +12,9 @@ public class WhileLoopBlock extends CanBeEnclosedBlock implements IHaveIncludeFi
 
     public WhileLoopBlock(int x, int y) {
         super("while", x, y);
-        includeField[0] = new IncludeField(this);
+        ReturnType[] accept = new ReturnType[1];
+        accept[0] = ReturnType.Bool;
+        includeField[0] = new IncludeField(this, accept);
         includeField[0].setColor(0, 224, 194).setSize(30, 40).setDefaultSize(30, 40);
         includeField[0].setPos(x + getDw() - includeField[0].getDW() - 10, y + internalH / 10);
     }
@@ -71,7 +74,7 @@ public class WhileLoopBlock extends CanBeEnclosedBlock implements IHaveIncludeFi
     public void enterBlock(Block block) {
         if (includeField[0].includeBlock() != null) return;
         if (block.parentBlock != null) return;
-        includeField[0].enterBlock(block);
+        if (!includeField[0].enterBlock(block)) return;
 
         this.w = getDw() + includeField[0].getW();
 

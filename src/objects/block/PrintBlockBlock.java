@@ -1,11 +1,12 @@
 package objects.block;
 
+import objects.block.enums.ReturnType;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
 public class PrintBlockBlock extends CanIncludeElementBlock {
-    public PrintBlockBlock(int x, int y) {
-        super("print", x, y, 150, 50);
+    public PrintBlockBlock(int x, int y, ReturnType[] returnTypes) {
+        super("print", x, y, 150, 50, returnTypes);
         includeFields[0].setColor(241, 196, 15);
     }
 

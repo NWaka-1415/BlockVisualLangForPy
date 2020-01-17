@@ -3,6 +3,7 @@ package objects.block.element;
 import objects.ComboBox;
 import objects.block.Block;
 import objects.block.IHaveContent;
+import objects.block.enums.ReturnType;
 
 public class BoolBlock extends Block implements IHaveContent {
 
@@ -13,6 +14,7 @@ public class BoolBlock extends Block implements IHaveContent {
 
     public BoolBlock(int x, int y, int w, int h) {
         super("bool", x, y, w, h);
+        setReturnType(ReturnType.Bool);
         calcContentPosition();
         comboBox = new ComboBox(contents, contentX, contentY).setParentBlock(this);
         comboBox.setPos(x + (w - comboBox.getW()) / 2, comboBox.getY());
@@ -20,6 +22,7 @@ public class BoolBlock extends Block implements IHaveContent {
 
     public BoolBlock(int x, int y, int w) {
         super("bool", x, y, w);
+        setReturnType(ReturnType.Bool);
         calcContentPosition();
         comboBox = new ComboBox(contents, contentX, contentY).setParentBlock(this);
         comboBox.setPos(x + (w - comboBox.getW()) / 2, comboBox.getY());
@@ -27,6 +30,7 @@ public class BoolBlock extends Block implements IHaveContent {
 
     public BoolBlock(int x, int y) {
         super("bool", x, y);
+        setReturnType(ReturnType.Bool);
         calcContentPosition();
         comboBox = new ComboBox(contents, contentX, contentY).setParentBlock(this);
         comboBox.setPos(x + (w - comboBox.getW()) / 2, comboBox.getY());

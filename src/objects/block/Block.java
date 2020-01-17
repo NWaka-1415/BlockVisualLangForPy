@@ -2,6 +2,7 @@ package objects.block;
 
 import objects.AppletObject;
 import objects.block.codeOption.ICodeOption;
+import objects.block.enums.ReturnType;
 import processing.core.PSurface;
 
 public abstract class Block extends AppletObject {
@@ -16,6 +17,17 @@ public abstract class Block extends AppletObject {
     public Block prevBlock;
     public Block postBlock;
     public Block parentBlock;
+
+    private ReturnType returnType = ReturnType.None;
+
+    public ReturnType getReturnType() {
+        return returnType;
+    }
+
+    public void setReturnType(ReturnType returnType) {
+        if (this.returnType != ReturnType.None) return;
+        this.returnType = returnType;
+    }
 
     protected final int MARGIN = 20;    //許容する二つのブロックの距離の差。適宜変更したり、xとy座標でそれぞれ分けるのもありです
 
