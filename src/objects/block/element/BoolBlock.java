@@ -70,7 +70,7 @@ public class BoolBlock extends Block implements IHaveContent {
     }
 
     @Override
-    public boolean connectable() {
+    public boolean connectable(Block block) {
         return false;
     }
 

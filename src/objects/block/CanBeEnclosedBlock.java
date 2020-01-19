@@ -49,14 +49,14 @@ public abstract class CanBeEnclosedBlock extends Block {
     }
 
     public boolean ableToEnclose(Block block) {
-        if (!block.connectable()) return false;
+        if (!block.connectable(this)) return false;
         int bx = block.x;
         int by = block.y;
         return PApplet.abs(x + internalW - bx) <= MARGIN && PApplet.abs(y + internalH - by) <= MARGIN;
     }
 
     public void encloseBlock(Block block) {
-        if (!block.connectable()) return;
+        if (!block.connectable(this)) return;
         if (this.encloseBlock != null) return;
         if (block.prevBlock != null) return;
         this.encloseBlock = block;

@@ -59,14 +59,14 @@ public class WhileLoopBlock extends CanBeEnclosedBlock implements IHaveIncludeFi
 
     @Override
     public boolean canConnect(Block block) {
-        if (!block.connectable()) return false;
+        if (!block.connectable(this)) return false;
         int bx = block.x;
         int by = block.y;
         return PApplet.abs(x - bx) <= MARGIN && PApplet.abs(y + h - by) <= MARGIN;
     }
 
     @Override
-    public boolean connectable() {
+    public boolean connectable(Block block) {
         return true;
     }
 

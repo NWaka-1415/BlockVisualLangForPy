@@ -119,7 +119,7 @@ public class ConditionalExpressionBlock extends Block implements IHaveContent, I
     }
 
     @Override
-    public boolean connectable() {
+    public boolean connectable(Block block) {
         return false;
     }
 

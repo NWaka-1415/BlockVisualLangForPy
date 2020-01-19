@@ -46,7 +46,7 @@ public class IntBlock extends InputtableBlock {
     }
 
     @Override
-    public boolean connectable() {
+    public boolean connectable(Block block) {
         return false;
     }
 

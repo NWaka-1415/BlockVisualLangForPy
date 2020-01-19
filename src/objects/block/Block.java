@@ -165,7 +165,7 @@ public abstract class Block extends AppletObject {
     public abstract boolean canConnect(Block block);
 
     //自分がつながるブロックか
-    public abstract boolean connectable();
+    public abstract boolean connectable(Block block);
 
     //ブロックを内包
     public abstract void enterBlock(Block block);
@@ -211,7 +211,7 @@ public abstract class Block extends AppletObject {
 
     //上のブロックに対して、引数に渡されたブロックを「下」に接続します
     public void connectPostBlock(Block block) {
-        if (!block.connectable()) return;
+        if (!block.connectable(this)) return;
         if (this.postBlock != null) return;
         //接続関係を設定
         this.postBlock = block;

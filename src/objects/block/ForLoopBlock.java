@@ -75,14 +75,14 @@ public class ForLoopBlock extends CanBeEnclosedBlock implements IHaveContent {
 
     @Override
     public boolean canConnect(Block block) {
-        if (!block.connectable()) return false;
+        if (!block.connectable(this)) return false;
         int bx = block.x;
         int by = block.y;
         return PApplet.abs(x - bx) <= MARGIN && PApplet.abs(y + h - by) <= MARGIN;
     }
 
     @Override
-    public boolean connectable() {
+    public boolean connectable(Block block) {
         return true;
     }
 

@@ -1,13 +1,11 @@
 package objects.component;
 
-import objects.ComboBox;
-import objects.IncludeField;
+import objects.*;
+import objects.TextField;
 import objects.block.*;
 import objects.block.element.BoolBlock;
 import objects.block.element.ConditionalExpressionBlock;
 import objects.block.element.IntBlock;
-import objects.AppletObject;
-import objects.TextField;
 import objects.block.enums.ReturnType;
 import processing.core.PApplet;
 import processing.core.PSurface;
@@ -198,6 +196,7 @@ public class MainComponent extends PApplet {
         else if (key == 'w') blocks.add(new WhileLoopBlock(mouseX, mouseY));
         else if (key == 'f') blocks.add(new ForLoopBlock(mouseX, mouseY));
         else if (key == 'l') blocks.add(new IfConditionalBranch(mouseX, mouseY));
+        else if (key == 'k') blocks.add(new ElseConditionalBranch(mouseX, mouseY));
         switch (keyCode) {
             case BACKSPACE:
                 TextField.minusSet();
