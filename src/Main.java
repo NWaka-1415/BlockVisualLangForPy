@@ -32,10 +32,11 @@ public class Main extends JFrame {
         applet.showCanvas();
 
         JTextArea codeTextArea = new JTextArea();
+        JScrollPane scrollPane = new JScrollPane(codeTextArea);
         Font font = new Font("SansSerif", Font.PLAIN, 32);
         codeTextArea.setFont(font);
         codeTextArea.setSize(400, 600);
-        add(codeTextArea);
+        add(scrollPane);
         applet.setCodeTextArea(codeTextArea);
     }
 }
