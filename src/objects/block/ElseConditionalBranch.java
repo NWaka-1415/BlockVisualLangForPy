@@ -1,4 +1,4 @@
-package objects;
+package objects.block;
 
 import objects.block.Block;
 import objects.block.CanBeEnclosedBlock;
@@ -53,7 +53,7 @@ public class ElseConditionalBranch extends CanBeEnclosedBlock {
 
     @Override
     public boolean connectable(Block block) {
-        return block instanceof IfConditionalBranch;
+        return block instanceof IfConditionalBranch || block instanceof ElseIfConditionalBranch;
     }
 
     @Override
