@@ -47,7 +47,7 @@ public class TextField extends AppletObject {
 
     public TextField(String text, Block block) {
         this.parentBlock = block;
-        this.text = text;
+        setText(text);
         textPosition = text.length() - 1;
         this.x = 0;
         this.y = 0;
@@ -61,7 +61,7 @@ public class TextField extends AppletObject {
 
     public TextField(String text, int x, int y, int w, int h, Block block) {
         this.parentBlock = block;
-        this.text = text;
+        setText(text);
         textPosition = text.length() - 1;
         this.x = x;
         this.y = y;
