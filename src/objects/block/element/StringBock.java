@@ -29,7 +29,10 @@ public class StringBock extends InputtableBlock {
 
     @Override
     public void exchangeCode() {
+        String option = "";
+        if (codeOption != null) option = codeOption.option();
 
+        setCode(option + "\"" + content + "\"");
     }
 
     @Override
