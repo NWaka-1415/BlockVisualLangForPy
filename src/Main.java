@@ -26,7 +26,7 @@ public class Main extends JFrame {
 //        setJMenuBar(menuBar);
 
 
-        MainComponent applet = new MainComponent(1500, 700);
+        MainComponent applet = new MainComponent(1500, 1500);
         Canvas canvas = applet.canvas;
         add(canvas);
         applet.showCanvas();
