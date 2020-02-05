@@ -201,6 +201,7 @@ public class TextField extends AppletObject {
         if (textPosition < 0) textPosition = -1;
     }
 
+    //TODO:マイナスが利かないaddも効かないかも、要修正
     private void addTextPosition() {
         textPosition++;
         AppletObject.debugLog(String.format(" textP ATP : %d", textPosition));
