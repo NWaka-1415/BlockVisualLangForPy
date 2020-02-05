@@ -186,8 +186,26 @@ public class MainComponent extends PApplet {
     //キーボードが押されている間呼ばれる関数
     public void keyPressed() {
         System.out.println(key);
-        TextField.set(key);
+        switch (keyCode) {
+            case BACKSPACE:
+                TextField.minusSet();
+                break;
+            case RIGHT:
+                TextField.moveTextPosition(true);
+                AppletObject.debugLog("Right");
+                break;
+            case LEFT:
+                TextField.moveTextPosition(false);
+                AppletObject.debugLog("Left");
+                break;
+            case SHIFT:
+                break;
+            default:
+                TextField.set(key);
+                break;
+        }
         changeCode();
+
         if (!TextField.existFocusedTextField()) {
             if (key == 'p') blocks.add(new PrintBlockBlock(mouseX, mouseY,
                     new ReturnType[]{ReturnType.Bool, ReturnType.Int, ReturnType.String,
@@ -201,19 +219,6 @@ public class MainComponent extends PApplet {
             else if (key == 'k') blocks.add(new ElseConditionalBranch(mouseX, mouseY));
             else if (key == 'j') blocks.add(new ElseIfConditionalBranch(mouseX, mouseY));
             else if (key == 's') blocks.add(new StringBock(mouseX, mouseY, ""));
-        }
-        switch (keyCode) {
-            case BACKSPACE:
-                TextField.minusSet();
-                break;
-            case RIGHT:
-                TextField.moveTextPosition(true);
-                AppletObject.debugLog("Right");
-                break;
-            case LEFT:
-                TextField.moveTextPosition(false);
-                AppletObject.debugLog("Left");
-                break;
         }
     }
 
