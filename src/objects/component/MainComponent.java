@@ -199,6 +199,9 @@ public class MainComponent extends PApplet {
                 AppletObject.debugLog("Left");
                 break;
             case SHIFT:
+            case ALT:
+            case CONTROL:
+                //TODO:このほか文字として拾われると困るものがあった際は追加
                 break;
             default:
                 TextField.set(key);
@@ -207,6 +210,7 @@ public class MainComponent extends PApplet {
         changeCode();
 
         if (!TextField.existFocusedTextField()) {
+            //テキストがあるフォーカスされているTextFieldがなければ
             if (key == 'p') blocks.add(new PrintBlockBlock(mouseX, mouseY,
                     new ReturnType[]{ReturnType.Bool, ReturnType.Int, ReturnType.String,
                             ReturnType.Float, ReturnType.Double, ReturnType.Char}));
@@ -219,6 +223,7 @@ public class MainComponent extends PApplet {
             else if (key == 'k') blocks.add(new ElseConditionalBranch(mouseX, mouseY));
             else if (key == 'j') blocks.add(new ElseIfConditionalBranch(mouseX, mouseY));
             else if (key == 's') blocks.add(new StringBock(mouseX, mouseY, ""));
+            changeCode();
         }
     }
 
