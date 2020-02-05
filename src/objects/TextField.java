@@ -18,6 +18,10 @@ public class TextField extends AppletObject {
     private int x, y, w, h;
     private int dW, dH;
 
+    public static boolean existFocusedTextField() {
+        return selectTextField != null;
+    }
+
     public static boolean isNumeric(String str) {
         try {
             int textInt = Integer.parseInt(str);
