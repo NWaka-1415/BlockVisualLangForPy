@@ -67,7 +67,7 @@ public class ElseIfConditionalBranch extends CanBeEnclosedBlock implements IHave
 
     @Override
     public boolean connectable(Block block) {
-        return block instanceof IfConditionalBranch;
+        return block instanceof IfConditionalBranch || block instanceof ElseIfConditionalBranch;
     }
 
     @Override

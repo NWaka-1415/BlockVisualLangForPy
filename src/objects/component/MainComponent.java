@@ -186,20 +186,6 @@ public class MainComponent extends PApplet {
     //キーボードが押されている間呼ばれる関数
     public void keyPressed() {
         System.out.println(key);
-        TextField.set(key);
-        changeCode();
-        if (key == 'p') blocks.add(new PrintBlockBlock(mouseX, mouseY,
-                new ReturnType[]{ReturnType.Bool, ReturnType.Int, ReturnType.String,
-                        ReturnType.Float, ReturnType.Double, ReturnType.Char}));
-        else if (key == 'i') blocks.add(new IntBlock(mouseX, mouseY));
-        else if (key == 'b') blocks.add(new BoolBlock(mouseX, mouseY));
-        else if (key == 'c') blocks.add(new ConditionalExpressionBlock(mouseX, mouseY));
-        else if (key == 'w') blocks.add(new WhileLoopBlock(mouseX, mouseY));
-        else if (key == 'f') blocks.add(new ForLoopBlock(mouseX, mouseY));
-        else if (key == 'l') blocks.add(new IfConditionalBranch(mouseX, mouseY));
-        else if (key == 'k') blocks.add(new ElseConditionalBranch(mouseX, mouseY));
-        else if (key == 'j') blocks.add(new ElseIfConditionalBranch(mouseX, mouseY));
-        else if (key == 's') blocks.add(new StringBock(mouseX, mouseY, ""));
         switch (keyCode) {
             case BACKSPACE:
                 TextField.minusSet();
@@ -212,6 +198,32 @@ public class MainComponent extends PApplet {
                 TextField.moveTextPosition(false);
                 AppletObject.debugLog("Left");
                 break;
+            case SHIFT:
+            case ALT:
+            case CONTROL:
+                //TODO:このほか文字として拾われると困るものがあった際は追加
+                break;
+            default:
+                TextField.set(key);
+                break;
+        }
+        changeCode();
+
+        if (!TextField.existFocusedTextField()) {
+            //テキストがあるフォーカスされているTextFieldがなければ
+            if (key == 'p') blocks.add(new PrintBlockBlock(mouseX, mouseY,
+                    new ReturnType[]{ReturnType.Bool, ReturnType.Int, ReturnType.String,
+                            ReturnType.Float, ReturnType.Double, ReturnType.Char}));
+            else if (key == 'i') blocks.add(new IntBlock(mouseX, mouseY));
+            else if (key == 'b') blocks.add(new BoolBlock(mouseX, mouseY));
+            else if (key == 'c') blocks.add(new ConditionalExpressionBlock(mouseX, mouseY));
+            else if (key == 'w') blocks.add(new WhileLoopBlock(mouseX, mouseY));
+            else if (key == 'f') blocks.add(new ForLoopBlock(mouseX, mouseY));
+            else if (key == 'l') blocks.add(new IfConditionalBranch(mouseX, mouseY));
+            else if (key == 'k') blocks.add(new ElseConditionalBranch(mouseX, mouseY));
+            else if (key == 'j') blocks.add(new ElseIfConditionalBranch(mouseX, mouseY));
+            else if (key == 's') blocks.add(new StringBock(mouseX, mouseY, ""));
+            changeCode();
         }
     }
 

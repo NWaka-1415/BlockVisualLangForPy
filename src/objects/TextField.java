@@ -18,6 +18,10 @@ public class TextField extends AppletObject {
     private int x, y, w, h;
     private int dW, dH;
 
+    public static boolean existFocusedTextField() {
+        return selectTextField != null;
+    }
+
     public static boolean isNumeric(String str) {
         try {
             int textInt = Integer.parseInt(str);
@@ -197,6 +201,7 @@ public class TextField extends AppletObject {
         if (textPosition < 0) textPosition = -1;
     }
 
+    //TODO:マイナスが利かないaddも効かないかも、要修正
     private void addTextPosition() {
         textPosition++;
         AppletObject.debugLog(String.format(" textP ATP : %d", textPosition));
